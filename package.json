@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "description": "Add a button to the Storybook toolbar that opens the file containing the Story in an IDE like VSCode.",
   "keywords": [
-    "file", "vscode", "link", "open", "storybook-addons"
+    "file",
+    "vscode",
+    "link",
+    "open",
+    "storybook-addons"
   ],
   "repository": {
     "type": "git",
@@ -98,8 +102,17 @@
   "storybook": {
     "displayName": "source-link",
     "supportedFrameworks": [
-      "react", "vue", "angular", "web-components", "ember", "html", "svelte", "preact", "react-native"
+      "react",
+      "vue",
+      "angular",
+      "web-components",
+      "ember",
+      "html",
+      "svelte",
+      "preact",
+      "react-native"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
-  }
+  },
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74"
 }
