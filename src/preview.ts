@@ -19,10 +19,10 @@ import { withRoundTrip } from "./withRoundTrip";
  */
 
 const preview: ProjectAnnotations<Renderer> = {
-  decorators: [withGlobals, withRoundTrip],
-  globals: {
-    [PARAM_KEY]: false,
-  },
+	decorators: [withGlobals, withRoundTrip],
+	globals: {
+		[PARAM_KEY]: false,
+	},
 };
 
 export default preview;
