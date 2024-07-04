@@ -1,38 +1,52 @@
-import React, { memo, useCallback, useEffect } from "react";
-import { useGlobals, useStorybookApi } from "@storybook/manager-api";
-import { Icons, IconButton } from "@storybook/components";
-import { ADDON_ID, PARAM_KEY, TOOL_ID } from "./constants";
+import React, { memo } from "react";
+import { useStorybookApi } from "@storybook/manager-api";
+import {
+	IconButton,
+	WithTooltip,
+	TooltipLinkList,
+} from "@storybook/components";
+import { JumpToIcon, VSCodeIcon } from "@storybook/icons";
 
 export const Tool = memo(function MyAddonSelector() {
-	const [globals, updateGlobals] = useGlobals();
 	const api = useStorybookApi();
 
-	const isActive = [true, "true"].includes(globals[PARAM_KEY]);
+	//TODO: get the root path
+	const rootPath = "";
+	const importPath = api.getCurrentStoryData()?.importPath as
+		| string
+		| undefined;
 
-	const toggleMyTool = useCallback(() => {
-		updateGlobals({
-			[PARAM_KEY]: !isActive,
-		});
-	}, [isActive]);
+	const fileUrl = importPath ? new URL(importPath, rootPath) : null;
 
-	useEffect(() => {
-		api.setAddonShortcut(ADDON_ID, {
-			label: "Toggle Measure [O]",
-			defaultShortcut: ["O"],
-			actionName: "outline",
-			showInMenu: false,
-			action: toggleMyTool,
-		});
-	}, [toggleMyTool, api]);
+	if (fileUrl === null) {
+		return null;
+	}
+
+	const vscodeHref = `vscode://${fileUrl.href}`;
+
+	console.log(api.getCurrentStoryData());
 
 	return (
-		<IconButton
-			key={TOOL_ID}
-			active={isActive}
-			title="Enable my addon"
-			onClick={toggleMyTool}
+		<WithTooltip
+			placement="top"
+			closeOnOutsideClick
+			tooltip={({ onHide }) => (
+				<TooltipLinkList
+					links={[
+						{
+							id: "vscode",
+							title: `${importPath}`,
+							target: "_blank",
+							href: vscodeHref,
+							icon: <VSCodeIcon />,
+						},
+					]}
+				/>
+			)}
 		>
-			<Icons icon="lightning" />
-		</IconButton>
+			<IconButton key="open-source-file" title="Open source file">
+				<JumpToIcon />
+			</IconButton>
+		</WithTooltip>
 	);
 });

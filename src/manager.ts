@@ -15,22 +15,22 @@ addons.register(ADDON_ID, () => {
 	addons.add(TOOL_ID, {
 		type: types.TOOL,
 		title: "My addon",
-		match: ({ viewMode }) => !!(viewMode && viewMode.match(/^(story|docs)$/)),
+		match: ({ viewMode }) => !!viewMode?.match(/^(story|docs)$/),
 		render: Tool,
 	});
 
-	// Register the panel
-	addons.add(PANEL_ID, {
-		type: types.PANEL,
-		title: "My addon",
-		match: ({ viewMode }) => viewMode === "story",
-		render: Panel,
-	});
+	// // Register the panel
+	// addons.add(PANEL_ID, {
+	// 	type: types.PANEL,
+	// 	title: "My addon",
+	// 	match: ({ viewMode }) => viewMode === "story",
+	// 	render: Panel,
+	// });
 
-	// Register the tab
-	addons.add(TAB_ID, {
-		type: types.TAB,
-		title: "My addon",
-		render: Tab,
-	});
+	// // Register the tab
+	// addons.add(TAB_ID, {
+	// 	type: types.TAB,
+	// 	title: "My addon",
+	// 	render: Tab,
+	// });
 });
