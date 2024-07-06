@@ -1,5 +1,5 @@
 import { defineConfig, type Options } from "tsup";
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import { globalPackages as globalManagerPackages } from "@storybook/manager/globals";
 import { globalPackages as globalPreviewPackages } from "@storybook/preview/globals";
 

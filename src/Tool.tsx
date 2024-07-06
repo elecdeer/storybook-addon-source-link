@@ -11,7 +11,8 @@ export const Tool = memo(function MyAddonSelector() {
 	const api = useStorybookApi();
 
 	//TODO: get the root path
-	const rootPath = "";
+	const rootPath =
+		"file:///Users/elecdeer/Dev/tools/storybook-addon-source-link/";
 	const importPath = api.getCurrentStoryData()?.importPath as
 		| string
 		| undefined;
