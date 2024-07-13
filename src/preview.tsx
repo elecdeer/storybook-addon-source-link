@@ -1,6 +1,6 @@
 import type { Addon_DecoratorFunction } from "@storybook/types";
-import type { SourceLinkParameter } from "./types";
 import { getFileUrl } from "./linkUtil";
+import type { SourceLinkParameter } from "./types";
 
 import { withParameterResolver } from "./preview/parameterResolver";
 

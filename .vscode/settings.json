@@ -5,5 +5,9 @@
 	},
 	"[typescriptreact]": {
 		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"editor.tabSize": 2,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "explicit"
 	}
 }
