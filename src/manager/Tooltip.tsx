@@ -4,11 +4,10 @@ import {
 	WithTooltip,
 } from "@storybook/components";
 import { JumpToIcon } from "@storybook/icons";
-import { useParameter, useStorybookApi } from "@storybook/manager-api";
+import { useStorybookApi } from "@storybook/manager-api";
 import React, { memo, useCallback, useState, type ReactNode } from "react";
-import type { SourceLinkParameter } from "../types";
+import { StorybookIcon, isIconName } from "./StorybookIcon";
 import { resolveLinks } from "./resolveParameter";
-import { isIconName, StorybookIcon } from "./StorybookIcon";
 
 export const Tool = memo(function MyAddonSelector() {
 	const rootPath = process.env.SOURCE_LINK_PROJECT_ROOT_PATH ?? "";
@@ -31,13 +30,11 @@ export const Tool = memo(function MyAddonSelector() {
 		| undefined
 	>();
 
-	const parameters = useParameter<SourceLinkParameter>("sourceLink");
-
 	const onOpenTooltip = useCallback(() => {
 		if (!importPath) return;
 		if (links) return;
 
-		resolveLinks(parameters, {
+		resolveLinks({
 			importPath,
 			rootPath,
 			isStaticBuild,
@@ -59,7 +56,7 @@ export const Tool = memo(function MyAddonSelector() {
 
 			setLinks(sortedLinks);
 		});
-	}, [importPath, parameters, rootPath, isStaticBuild, links]);
+	}, [importPath, rootPath, isStaticBuild, links]);
 
 	return (
 		<WithTooltip

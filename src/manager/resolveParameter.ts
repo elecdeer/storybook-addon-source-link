@@ -1,15 +1,12 @@
 import { addons } from "@storybook/manager-api";
-import type { LinkEntry, SourceLinkParameter } from "../types";
 import { EVENTS } from "src/constants";
+import type { LinkEntry } from "../types";
 
-export const resolveLinks = async (
-	parameter: SourceLinkParameter,
-	context: {
-		importPath: string;
-		rootPath: string;
-		isStaticBuild: boolean;
-	},
-): Promise<(LinkEntry & { id: string })[]> => {
+export const resolveLinks = async (context: {
+	importPath: string;
+	rootPath: string;
+	isStaticBuild: boolean;
+}): Promise<(LinkEntry & { id: string })[]> => {
 	const channel = addons.getChannel();
 
 	return new Promise((resolve) => {
