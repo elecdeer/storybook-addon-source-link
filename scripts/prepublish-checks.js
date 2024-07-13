@@ -1,10 +1,10 @@
 #!/usr/bin/env zx
 
-import boxen from "boxen";
-import dedent from "dedent";
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import { globalPackages as globalManagerPackages } from "@storybook/manager/globals";
 import { globalPackages as globalPreviewPackages } from "@storybook/preview/globals";
+import boxen from "boxen";
+import dedent from "dedent";
 
 const packageJson = await readFile("./package.json", "utf8").then(JSON.parse);
 
@@ -41,7 +41,7 @@ if (name.includes("addon-kit") || displayName.includes("Addon Kit")) {
 const readmeTestStrings =
 	"# Storybook Addon Kit|Click the \\*\\*Use this template\\*\\* button to get started.|https://user-images.githubusercontent.com/42671/106809879-35b32000-663a-11eb-9cdc-89f178b5273f.gif";
 
-if ((await $`cat README.md | grep -E ${readmeTestStrings}`.exitCode) == 0) {
+if ((await $`cat README.md | grep -E ${readmeTestStrings}`.exitCode) === 0) {
 	console.error(
 		boxen(
 			dedent`
@@ -62,11 +62,11 @@ if ((await $`cat README.md | grep -E ${readmeTestStrings}`.exitCode) == 0) {
  */
 const peerDependencies = Object.keys(packageJson.peerDependencies || {});
 const globalPackages = [...globalManagerPackages, ...globalPreviewPackages];
-peerDependencies.forEach((dependency) => {
+for (const dependency of peerDependencies) {
 	if (globalPackages.includes(dependency)) {
-		console.error(
-			boxen(
-				dedent`
+  console.error(
+  	boxen(
+    dedent`
           ${chalk.red.bold("Unnecessary peer dependency")}
   
           ${chalk.red(dedent`You have a peer dependency on ${chalk.bold(dependency)} which is most likely unnecessary
@@ -74,12 +74,12 @@ peerDependencies.forEach((dependency) => {
           Check the "bundling" section in README.md for more information.
           If you are absolutely sure you are doing it correct, you should remove this check from scripts/prepublish-checks.js.`)}
         `,
-				{ padding: 1, borderColor: "red" },
-			),
-		);
+    { padding: 1, borderColor: "red" },
+  	),
+  );
 
-		exitCode = 1;
+  exitCode = 1;
 	}
-});
+}
 
 process.exit(exitCode);

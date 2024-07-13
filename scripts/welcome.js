@@ -1,11 +1,11 @@
+import { execSync } from "node:child_process";
+import { readFile, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable no-console */
 import prompts from "prompts";
 import { dedent } from "ts-dedent";
-import { dirname, resolve } from "path";
-import { readFile, writeFile } from "fs/promises";
-import { execSync } from "child_process";
-import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -132,9 +132,9 @@ const main = async () => {
 
 	const authorField = authorName + (authorEmail ? ` <${authorEmail}>` : "");
 
-	const packageJson = resolve(__dirname, `../package.json`);
+	const packageJson = resolve(__dirname, "../package.json");
 
-	console.log(`\n👷 Updating package.json...`);
+	console.log("\n👷 Updating package.json...");
 	let packageJsonContents = await readFile(packageJson, "utf-8");
 
 	packageJsonContents = packageJsonContents
@@ -150,7 +150,7 @@ const main = async () => {
 	await writeFile(packageJson, packageJsonContents);
 
 	console.log("📝 Updating the README...");
-	const readme = resolve(__dirname, `../README.md`);
+	const readme = resolve(__dirname, "../README.md");
 	let readmeContents = await readFile(readme, "utf-8");
 
 	const regex = /<\!-- README START -->([\s\S]*)<\!-- README END -->/g;
@@ -165,7 +165,7 @@ const main = async () => {
 
 	await writeFile(readme, readmeContents);
 
-	console.log(`📦 Creating a commit...`);
+	console.log("📦 Creating a commit...");
 	execSync('git add . && git commit -m "project setup" --no-verify');
 
 	console.log(
