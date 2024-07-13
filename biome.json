@@ -1,8 +1,10 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"files": {
+		"ignore": ["**/dist/*", "node_modules/**", "storybook-static/**/*"]
+	},
 	"formatter": {
-		"enabled": true,
-		"ignore": ["**/dist"]
+		"enabled": true
 	},
 	"organizeImports": { "enabled": true },
 	"linter": { "enabled": true, "rules": { "recommended": true } }

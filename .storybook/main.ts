@@ -14,5 +14,10 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: "tag",
 	},
+	core: {
+		channelOptions: {
+			// allowFunction: true,
+		},
+	},
 };
 export default config;
