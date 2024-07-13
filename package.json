@@ -2,13 +2,7 @@
 	"name": "storybook-addon-source-link",
 	"version": "0.0.0",
 	"description": "Add a button to the Storybook toolbar that opens the file containing the Story in an IDE like VSCode.",
-	"keywords": [
-		"file",
-		"vscode",
-		"link",
-		"open",
-		"storybook-addons"
-	],
+	"keywords": ["file", "vscode", "link", "open", "storybook-addons"],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/elecdeer/storybook-addon-source-link/tree/main"
@@ -27,12 +21,7 @@
 		"./manager": "./dist/manager.js",
 		"./package.json": "./package.json"
 	},
-	"files": [
-		"dist/**/*",
-		"README.md",
-		"*.js",
-		"*.d.ts"
-	],
+	"files": ["dist/**/*", "README.md", "*.js", "*.d.ts"],
 	"scripts": {
 		"build": "tsup",
 		"build:watch": "npm run build -- --watch",
@@ -85,18 +74,10 @@
 		"access": "public"
 	},
 	"bundler": {
-		"exportEntries": [
-			"src/index.ts"
-		],
-		"managerEntries": [
-			"src/manager.ts"
-		],
-		"previewEntries": [
-			"src/preview.tsx"
-		],
-		"nodeEntries": [
-			"src/preset.ts"
-		]
+		"exportEntries": ["src/index.ts"],
+		"managerEntries": ["src/manager.ts"],
+		"previewEntries": ["src/preview.tsx"],
+		"nodeEntries": ["src/preset.ts"]
 	},
 	"storybook": {
 		"displayName": "source-link",

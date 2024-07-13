@@ -64,9 +64,9 @@ const peerDependencies = Object.keys(packageJson.peerDependencies || {});
 const globalPackages = [...globalManagerPackages, ...globalPreviewPackages];
 for (const dependency of peerDependencies) {
 	if (globalPackages.includes(dependency)) {
-  console.error(
-  	boxen(
-    dedent`
+		console.error(
+			boxen(
+				dedent`
           ${chalk.red.bold("Unnecessary peer dependency")}
   
           ${chalk.red(dedent`You have a peer dependency on ${chalk.bold(dependency)} which is most likely unnecessary
@@ -74,11 +74,11 @@ for (const dependency of peerDependencies) {
           Check the "bundling" section in README.md for more information.
           If you are absolutely sure you are doing it correct, you should remove this check from scripts/prepublish-checks.js.`)}
         `,
-    { padding: 1, borderColor: "red" },
-  	),
-  );
+				{ padding: 1, borderColor: "red" },
+			),
+		);
 
-  exitCode = 1;
+		exitCode = 1;
 	}
 }
 
