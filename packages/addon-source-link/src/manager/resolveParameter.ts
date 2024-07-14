@@ -1,5 +1,5 @@
 import { addons } from "@storybook/manager-api";
-import { EVENTS } from "src/constants";
+import { EVENTS } from "../constants";
 import type { LinkEntry } from "../types";
 
 export const resolveLinks = async (context: {

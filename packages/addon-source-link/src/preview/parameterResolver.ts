@@ -1,6 +1,6 @@
 import { useChannel } from "@storybook/preview-api";
 import type { Addon_DecoratorFunction } from "@storybook/types";
-import { EVENTS } from "src/constants";
+import { EVENTS } from "../constants";
 import type {
 	LinkEntry,
 	Resolvable,

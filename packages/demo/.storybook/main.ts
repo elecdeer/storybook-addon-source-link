@@ -5,19 +5,12 @@ const config: StorybookConfig = {
 		"@storybook/addon-links",
 		"@storybook/addon-essentials",
 		"@storybook/addon-interactions",
-		"./local-preset.js",
+		"storybook-addon-source-link",
 	],
 	framework: {
 		name: "@storybook/react-vite",
 		options: {},
 	},
-	docs: {
-		autodocs: "tag",
-	},
-	core: {
-		channelOptions: {
-			// allowFunction: true,
-		},
-	},
+	docs: {},
 };
 export default config;
