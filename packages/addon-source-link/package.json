@@ -27,7 +27,6 @@
 		"build:watch": "npm run build -- --watch",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "run-p build:watch \"storybook --quiet\"",
-		"prerelease": "zx scripts/prepublish-checks.js",
 		"release": "npm run build && auto shipit",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build"
