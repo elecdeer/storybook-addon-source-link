@@ -12,5 +12,8 @@
 	"editor.tabSize": 2,
 	"editor.codeActionsOnSave": {
 		"source.organizeImports.biome": "explicit"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }
