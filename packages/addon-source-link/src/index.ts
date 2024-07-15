@@ -1,3 +1,3 @@
 export type { SourceLinkParameter } from "./types";
 
-export { getFileUrl } from "./linkUtil";
+export { getFileUrl, joinPath } from "./linkUtil";
