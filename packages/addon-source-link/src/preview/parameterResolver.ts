@@ -1,5 +1,6 @@
-import { useChannel } from "@storybook/core/preview-api";
+import { addons } from "@storybook/core/preview-api";
 import type { Addon_DecoratorFunction } from "@storybook/core/types";
+import { type FC, useEffect } from "react";
 import { EVENTS } from "../constants";
 import type {
 	LinkEntry,
@@ -8,15 +9,17 @@ import type {
 	SourceLinkParameter,
 } from "../types";
 
-export const withParameterResolver: Addon_DecoratorFunction = (
-	StoryFn,
-	ctx,
+export const useParameterResolver = (
+	parameter: SourceLinkParameter,
+	disabled?: boolean,
 ) => {
-	const emit = useChannel({
-		[EVENTS.REQUEST_RESOLVABLE_PARAM]: (context: ResolveContext) => {
-			const parameters: SourceLinkParameter = ctx.parameters.sourceLink;
+	useEffect(() => {
+		const channel = addons.getChannel();
 
-			const resolvedParameters = Object.entries(parameters.links)
+		if (disabled) return;
+
+		const handler = (context: ResolveContext) => {
+			const resolvedParameters = Object.entries(parameter.links)
 				.map(([id, entry]) => {
 					const resolvedEntry = resolveLinkEntry(entry, context);
 					if (!resolvedEntry) return undefined;
@@ -27,11 +30,31 @@ export const withParameterResolver: Addon_DecoratorFunction = (
 				})
 				.filter((entry) => !!entry);
 
-			emit(EVENTS.RESPONSE_RESOLVABLE_PARAM, resolvedParameters);
-		},
-	});
+			channel.emit(EVENTS.RESPONSE_RESOLVABLE_PARAM, resolvedParameters);
+		};
 
+		channel.on(EVENTS.REQUEST_RESOLVABLE_PARAM, handler);
+
+		return () => {
+			channel.off(EVENTS.REQUEST_RESOLVABLE_PARAM, handler);
+		};
+	});
+};
+
+export const withParameterResolver: Addon_DecoratorFunction = (
+	StoryFn,
+	ctx,
+) => {
+	// if the viewMode is docs, the source link is resolved in ParameterResolver
+	useParameterResolver(ctx.parameters.sourceLink, ctx.viewMode === "docs");
 	return StoryFn();
+};
+
+export const ParameterResolver: FC<{
+	parameter: SourceLinkParameter;
+}> = ({ parameter }) => {
+	useParameterResolver(parameter);
+	return null;
 };
 
 const resolveLinkEntry = (

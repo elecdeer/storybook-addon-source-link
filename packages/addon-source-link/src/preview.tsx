@@ -1,8 +1,13 @@
-import type { Addon_DecoratorFunction } from "@storybook/core/types";
+import { DocsContainer, type DocsContainerProps } from "@storybook/blocks";
+import type { Addon_DecoratorFunction, Renderer } from "@storybook/core/types";
 import { getFileUrl } from "./linkUtil";
 import type { SourceLinkParameter } from "./types";
 
-import { withParameterResolver } from "./preview/parameterResolver";
+import React, { type PropsWithChildren } from "react";
+import {
+	ParameterResolver,
+	withParameterResolver,
+} from "./preview/parameterResolver";
 
 export const parameters = {
 	sourceLink: {
@@ -35,6 +40,25 @@ export const parameters = {
 			},
 		},
 	} satisfies SourceLinkParameter,
+	docs: {
+		container: ({
+			children,
+			...props
+		}: PropsWithChildren<DocsContainerProps<Renderer>>) => {
+			const { projectAnnotations } = props.context;
+
+			return (
+				<DocsContainer {...props}>
+					{children}
+					{projectAnnotations.parameters && (
+						<ParameterResolver
+							parameter={projectAnnotations.parameters.sourceLink}
+						/>
+					)}
+				</DocsContainer>
+			);
+		},
+	},
 };
 
 export const decorators: Addon_DecoratorFunction[] = [withParameterResolver];
