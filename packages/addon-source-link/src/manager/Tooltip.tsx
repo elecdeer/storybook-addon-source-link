@@ -3,7 +3,8 @@ import {
 	TooltipLinkList,
 	WithTooltip,
 } from "@storybook/core/components";
-import { useStorybookApi } from "@storybook/core/manager-api";
+import { STORY_CHANGED } from "@storybook/core/core-events";
+import { useChannel, useStorybookApi } from "@storybook/core/manager-api";
 import type { API_LeafEntry } from "@storybook/core/types";
 import { JumpToIcon } from "@storybook/icons";
 import React, { memo, useCallback, useState, type ReactNode } from "react";
@@ -27,6 +28,12 @@ export const Tool = memo(function MyAddonSelector() {
 		  }[]
 		| undefined
 	>();
+
+	useChannel({
+		[STORY_CHANGED]: () => {
+			setLinks(undefined);
+		},
+	});
 
 	const onOpenTooltip = useCallback(() => {
 		if (!storyData) return;
