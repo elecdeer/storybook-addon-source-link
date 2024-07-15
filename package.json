@@ -2,7 +2,8 @@
 	"private": true,
 	"name": "packages",
 	"scripts": {
-		"demo": "pnpm -F storybook-addon-source-link run build && pnpm -F demo run storybook"
+		"demo": "pnpm -F storybook-addon-source-link run build && pnpm -F demo run storybook",
+		"release": "pnpm -r run build && changeset publish"
 	},
 	"devDependencies": {
 		"@changesets/changelog-github": "^0.5.0",
