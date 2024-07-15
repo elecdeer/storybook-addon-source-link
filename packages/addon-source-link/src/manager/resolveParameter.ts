@@ -1,12 +1,10 @@
 import { addons } from "@storybook/core/manager-api";
 import { EVENTS } from "../constants";
-import type { LinkEntry } from "../types";
+import type { LinkEntry, ResolveContext } from "../types";
 
-export const resolveLinks = async (context: {
-	importPath: string;
-	rootPath: string;
-	isStaticBuild: boolean;
-}): Promise<(LinkEntry & { id: string })[]> => {
+export const resolveLinks = async (
+	context: ResolveContext,
+): Promise<(LinkEntry & { id: string })[]> => {
 	const channel = addons.getChannel();
 
 	return new Promise((resolve) => {

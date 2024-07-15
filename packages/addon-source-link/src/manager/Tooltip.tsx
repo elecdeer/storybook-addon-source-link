@@ -4,6 +4,7 @@ import {
 	WithTooltip,
 } from "@storybook/core/components";
 import { useStorybookApi } from "@storybook/core/manager-api";
+import type { API_LeafEntry } from "@storybook/core/types";
 import { JumpToIcon } from "@storybook/icons";
 import React, { memo, useCallback, useState, type ReactNode } from "react";
 import { StorybookIcon, isIconName } from "./StorybookIcon";
@@ -14,10 +15,7 @@ export const Tool = memo(function MyAddonSelector() {
 	const isStaticBuild = process.env.NODE_ENV === "production";
 
 	const api = useStorybookApi();
-
-	const importPath = api.getCurrentStoryData()?.importPath as
-		| string
-		| undefined;
+	const storyData = api.getCurrentStoryData() as API_LeafEntry | undefined;
 
 	const [links, setLinks] = useState<
 		| {
@@ -31,13 +29,18 @@ export const Tool = memo(function MyAddonSelector() {
 	>();
 
 	const onOpenTooltip = useCallback(() => {
-		if (!importPath) return;
+		if (!storyData) return;
 		if (links) return;
 
 		resolveLinks({
-			importPath,
 			rootPath,
 			isStaticBuild,
+			type: storyData.type,
+			importPath: storyData.importPath,
+			id: storyData.id,
+			title: storyData.title,
+			name: storyData.name,
+			tags: storyData.tags,
 		}).then((links) => {
 			const sortedLinks = links
 				.map((item) => {
@@ -61,7 +64,7 @@ export const Tool = memo(function MyAddonSelector() {
 
 			setLinks(sortedLinks);
 		});
-	}, [importPath, rootPath, isStaticBuild, links]);
+	}, [rootPath, isStaticBuild, storyData, links]);
 
 	return (
 		<WithTooltip

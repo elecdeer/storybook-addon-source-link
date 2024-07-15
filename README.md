@@ -100,9 +100,14 @@ Type: `{ [key: string]: LinkEntry | undefined | ((context: ResolveContext) => Li
 If `undefined` is returned, the link will not be added.
 
 - `ResolveContext`:
-  - `importPath`: The path to the source file. e.g. `"./src/stories/Button.tsx"`
   - `rootPath`: The path to the root directory of the source files. e.g. `"/Users/username/project"`. If `isStaticBuild` is `true`, this value is `""`.
   - `isStaticBuild`: Whether the Storybook is built statically.
+  - `type`: The type of entry. `"story"` or `"docs"`.
+  - `importPath`: The path to the source file. e.g. `"./src/stories/Button.tsx"`
+  - `id`: The ID of the story. e.g. `"example-button--primary"`
+  - `title`: The title of the story or the component. e.g. `"Example/Button"`
+  - `name`: The name of the story. e.g. `"Primary"`
+  - `tags`: The tags of the story. e.g. `["autodocs"]`
 - `LinkEntry`:
   - `label`: The label of the link.
   - `href`: The URL of the link.

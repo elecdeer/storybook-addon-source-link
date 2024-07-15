@@ -1,6 +1,9 @@
 {
 	"private": true,
 	"name": "packages",
+	"scripts": {
+		"demo": "pnpm -F storybook-addon-source-link run build && pnpm -F demo run storybook"
+	},
 	"devDependencies": {
 		"typescript": "^5.5.3",
 		"@biomejs/biome": "^1.8.3",
