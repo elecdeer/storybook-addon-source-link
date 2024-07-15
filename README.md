@@ -95,7 +95,7 @@ This addon contributes the following parameters to Storybook, under the `sourceL
 
 #### `links`
 
-Type: `{ [key: string]: (context: ResolveContext) => LinkEntry | undefined }`
+Type: `{ [key: string]: LinkEntry | undefined | ((context: ResolveContext) => LinkEntry | undefined) }`
 
 If `undefined` is returned, the link will not be added.
 
@@ -137,6 +137,12 @@ const preview: Preview = {
             href,
             icon: "VSCodeIcon",
           };
+        },
+        "addon-powered-by": {
+          label: "Powered by addon-source-link",
+          href: "https://github.com/elecdeer/storybook-addon-source-link",
+          order: Number.MAX_SAFE_INTEGER,
+          icon: "InfoIcon",
         },
       },
     } satisfies SourceLinkParameter,

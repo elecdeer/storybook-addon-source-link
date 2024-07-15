@@ -27,6 +27,12 @@ export const parameters = {
 					icon: "VSCodeIcon",
 				};
 			},
+			"addon-powered-by": {
+				label: "Powered by addon-source-link",
+				href: "https://github.com/elecdeer/storybook-addon-source-link",
+				order: Number.MAX_SAFE_INTEGER,
+				icon: "InfoIcon",
+			},
 		},
 	} satisfies SourceLinkParameter,
 };
