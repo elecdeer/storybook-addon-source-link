@@ -1,7 +1,12 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
 	"files": {
-		"ignore": ["**/dist/*", "node_modules/**/*", "storybook-static/**/*"]
+		"ignore": [
+			"**/dist/*",
+			"node_modules/**/*",
+			"storybook-static/**/*",
+			"**/package.json"
+		]
 	},
 	"formatter": {
 		"enabled": true
