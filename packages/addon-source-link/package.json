@@ -32,18 +32,14 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
+		"@storybook/core": "^8.2.2",
+		"@storybook/icons": "^1.2.9",
+		"path-browserify": "^1.0.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"@storybook/icons": "^1.2.9",
-		"@storybook/manager-api": "8.2.2",
-		"@storybook/preview-api": "8.2.2",
-		"path-browserify": "^1.0.1",
 		"storybook": "8.2.2"
 	},
 	"devDependencies": {
-		"@storybook/manager": "8.2.2",
-		"@storybook/preview": "8.2.2",
-		"@storybook/types": "8.2.2",
 		"@types/node": "^20.14.9",
 		"@types/path-browserify": "^1.0.2",
 		"@types/react": "^18.3.3",

@@ -1,5 +1,5 @@
-import { useChannel } from "@storybook/preview-api";
-import type { Addon_DecoratorFunction } from "@storybook/types";
+import { useChannel } from "@storybook/core/preview-api";
+import type { Addon_DecoratorFunction } from "@storybook/core/types";
 import { EVENTS } from "../constants";
 import type {
 	LinkEntry,

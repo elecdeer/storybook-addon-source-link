@@ -20,15 +20,12 @@ importers:
 
   packages/addon-source-link:
     dependencies:
+      '@storybook/core':
+        specifier: ^8.2.2
+        version: 8.2.2
       '@storybook/icons':
         specifier: ^1.2.9
         version: 1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@storybook/manager-api':
-        specifier: 8.2.2
-        version: 8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))
-      '@storybook/preview-api':
-        specifier: 8.2.2
-        version: 8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))
       path-browserify:
         specifier: ^1.0.1
         version: 1.0.1
@@ -42,15 +39,6 @@ importers:
         specifier: 8.2.2
         version: 8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8))
     devDependencies:
-      '@storybook/manager':
-        specifier: 8.2.2
-        version: 8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))
-      '@storybook/preview':
-        specifier: 8.2.2
-        version: 8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))
-      '@storybook/types':
-        specifier: 8.2.2
-        version: 8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))
       '@types/node':
         specifier: ^20.14.9
         version: 20.14.10
@@ -1323,26 +1311,6 @@ packages:
     peerDependencies:
       storybook: ^8.2.2
 
-  '@storybook/manager-api@8.2.2':
-    resolution: {integrity: sha512-v7pbddJO21RAsGyT0+GZMgP25nLCdhQFYnmy+aRCgL6rz+k7bToPwcL+qK0mb5sfng+Ah2MAAK9ZvXWTYAVeqw==}
-    peerDependencies:
-      storybook: ^8.2.2
-
-  '@storybook/manager@8.2.2':
-    resolution: {integrity: sha512-6ou1mQCV3syBPawuSqOhPqoujo1rNhgv+sblO7FbpYgHwVitJMWSIxF5S/Dd+y83Uv1S7a6nVDrDnzfw6bbeUQ==}
-    peerDependencies:
-      storybook: ^8.2.2
-
-  '@storybook/preview-api@8.2.2':
-    resolution: {integrity: sha512-/2V5MBV50VmdrgVV18xaTVxpBMZDfUyCntIBixybAHQhaD4DS2nRT7nyZDA7XRKax1VKF0i8EdR8JcsmtIwaKQ==}
-    peerDependencies:
-      storybook: ^8.2.2
-
-  '@storybook/preview@8.2.2':
-    resolution: {integrity: sha512-4YJ/QVAxq1ktojFBVuOjqGN0I4gzadU8+3+CNz33Qt8brBQinQtN/3Dj9vIC6nv4XbGy3DlxemeBmaGlLRwZhA==}
-    peerDependencies:
-      storybook: ^8.2.2
-
   '@storybook/react-dom-shim@8.2.2':
     resolution: {integrity: sha512-4fb1/yT9WXHzHjs0In6orIEZxga5eXd9UaXEFGudBgowCjDUVP9LabDdKTbGusz20lfaAkATsRG/W+EcSLoh8w==}
     peerDependencies:
@@ -1373,11 +1341,6 @@ packages:
 
   '@storybook/test@8.2.2':
     resolution: {integrity: sha512-X2qAKErjTh1X7XLAZqCMtU0ZK8JuwdKmgiqU0oXWxIDmCX6/Dm9ZIcdMZHs/S+K/UnIByjNlQpTShLVfRUeN1w==}
-    peerDependencies:
-      storybook: ^8.2.2
-
-  '@storybook/types@8.2.2':
-    resolution: {integrity: sha512-SlwfeluJC/FgTPIda4ivjSeCyi7G8krWZDX/FzM3k6MtZdDsV9vdg1ttBObugn6AESy4Zh+unePo7SbD8/sSfQ==}
     peerDependencies:
       storybook: ^8.2.2
 
@@ -5522,22 +5485,6 @@ snapshots:
       storybook: 8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8))
       util: 0.12.5
 
-  '@storybook/manager-api@8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))':
-    dependencies:
-      storybook: 8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8))
-
-  '@storybook/manager@8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))':
-    dependencies:
-      storybook: 8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8))
-
-  '@storybook/preview-api@8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))':
-    dependencies:
-      storybook: 8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8))
-
-  '@storybook/preview@8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))':
-    dependencies:
-      storybook: 8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8))
-
   '@storybook/react-dom-shim@8.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))':
     dependencies:
       react: 18.3.1
@@ -5608,10 +5555,6 @@ snapshots:
       - '@types/jest'
       - jest
       - vitest
-
-  '@storybook/types@8.2.2(storybook@8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8)))':
-    dependencies:
-      storybook: 8.2.2(@babel/preset-env@7.24.8(@babel/core@7.24.8))
 
   '@testing-library/dom@10.1.0':
     dependencies:

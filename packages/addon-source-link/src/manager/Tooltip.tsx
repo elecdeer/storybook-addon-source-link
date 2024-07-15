@@ -2,9 +2,9 @@ import {
 	IconButton,
 	TooltipLinkList,
 	WithTooltip,
-} from "@storybook/components";
+} from "@storybook/core/components";
+import { useStorybookApi } from "@storybook/core/manager-api";
 import { JumpToIcon } from "@storybook/icons";
-import { useStorybookApi } from "@storybook/manager-api";
 import React, { memo, useCallback, useState, type ReactNode } from "react";
 import { StorybookIcon, isIconName } from "./StorybookIcon";
 import { resolveLinks } from "./resolveParameter";
