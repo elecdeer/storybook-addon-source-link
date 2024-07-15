@@ -49,10 +49,15 @@ export const Tool = memo(function MyAddonSelector() {
 						icon: item.icon && isIconName(item.icon) && (
 							<StorybookIcon name={item.icon} />
 						),
-						order: item.order ?? Number.MAX_SAFE_INTEGER,
+						order: item.order ?? 0,
 					};
 				})
-				.sort((a, b) => a.order - b.order);
+				.sort((a, b) => {
+					if (a.order === b.order) {
+						return a.title.localeCompare(b.title);
+					}
+					return a.order - b.order;
+				});
 
 			setLinks(sortedLinks);
 		});

@@ -107,7 +107,7 @@ If `undefined` is returned, the link will not be added.
   - `label`: The label of the link.
   - `href`: The URL of the link.
   - `icon`: (Optional) The icon name in [@storybook/icons](https://main--64b56e737c0aeefed9d5e675.chromatic.com/?path=/docs/introduction--docs)
-  - `order`: (Optional) When order is specified, it will be sorted in ascending order.
+  - `order`: (Optional) When order is specified, it will be sorted in ascending order. The default value is `0`.
 
 ### Preset settings provided by the addon
 
