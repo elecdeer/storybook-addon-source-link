@@ -5,11 +5,27 @@ import {
 } from "@storybook/core/components";
 import { STORY_CHANGED } from "@storybook/core/core-events";
 import { useChannel, useStorybookApi } from "@storybook/core/manager-api";
+import { styled } from "@storybook/core/theming";
 import type { API_LeafEntry } from "@storybook/core/types";
-import { JumpToIcon } from "@storybook/icons";
-import React, { memo, useCallback, useState, type ReactNode } from "react";
+import { CheckIcon, CopyIcon, JumpToIcon } from "@storybook/icons";
+import React, {
+	memo,
+	useCallback,
+	useMemo,
+	useState,
+	type ReactNode,
+} from "react";
+import type { LinkEntry } from "../types";
 import { StorybookIcon, isIconName } from "./StorybookIcon";
 import { resolveLinks } from "./resolveParameter";
+
+const ColoredCopyIcon = styled(CopyIcon)`
+	fill: ${({ theme }) => theme.color.dark};
+`;
+
+const ColoredCheckIcon = styled(CheckIcon)`
+	fill: ${({ theme }) => theme.color.dark};
+`;
 
 export const Tool = memo(function MyAddonSelector() {
 	const rootPath = process.env.SOURCE_LINK_PROJECT_ROOT_PATH ?? "";
@@ -18,26 +34,21 @@ export const Tool = memo(function MyAddonSelector() {
 	const api = useStorybookApi();
 	const storyData = api.getCurrentStoryData() as API_LeafEntry | undefined;
 
-	const [links, setLinks] = useState<
-		| {
-				id: string;
-				title: string;
-				href: string;
-				target: string;
-				icon?: ReactNode;
-		  }[]
-		| undefined
+	const [linksData, setLinksData] = useState<
+		(LinkEntry & { id: string })[] | undefined
 	>();
+	const [copyClickedLink, setCopyClickedLink] = useState<string>();
 
 	useChannel({
 		[STORY_CHANGED]: () => {
-			setLinks(undefined);
+			setLinksData(undefined);
 		},
 	});
 
 	const onOpenTooltip = useCallback(() => {
+		setCopyClickedLink(undefined);
 		if (!storyData) return;
-		if (links) return;
+		if (linksData) return;
 
 		resolveLinks({
 			rootPath,
@@ -48,37 +59,59 @@ export const Tool = memo(function MyAddonSelector() {
 			title: storyData.title,
 			name: storyData.name,
 			tags: storyData.tags,
-		}).then((links) => {
-			const sortedLinks = links
-				.map((item) => {
+		}).then((link) => {
+			setLinksData(link);
+		});
+	}, [rootPath, isStaticBuild, storyData, linksData]);
+
+	const links = useMemo(() => {
+		return linksData
+			?.map((item) => {
+				if (item.type === "copy") {
+					const clicked = !!copyClickedLink;
 					return {
 						id: item.id,
 						title: item.label,
-						href: item.href,
-						target: "_blank",
+						onClick: () => {
+							navigator.clipboard.writeText(item.href);
+							if (!clicked) {
+								setCopyClickedLink(item.id);
+							}
+						},
 						icon: item.icon && isIconName(item.icon) && (
 							<StorybookIcon name={item.icon} />
 						),
+						right: clicked ? <ColoredCheckIcon /> : <ColoredCopyIcon />,
 						order: item.order ?? 0,
 					};
-				})
-				.sort((a, b) => {
-					if (a.order === b.order) {
-						return a.title.localeCompare(b.title);
-					}
-					return a.order - b.order;
-				});
+				}
 
-			setLinks(sortedLinks);
-		});
-	}, [rootPath, isStaticBuild, storyData, links]);
+				return {
+					id: item.id,
+					title: item.label,
+					href: item.href,
+					target:
+						(item.type ?? "linkBlank") === "linkBlank" ? "_blank" : undefined,
+					icon: item.icon && isIconName(item.icon) && (
+						<StorybookIcon name={item.icon} />
+					),
+					order: item.order ?? 0,
+				};
+			})
+			.sort((a, b) => {
+				if (a.order === b.order) {
+					return a.title.localeCompare(b.title);
+				}
+				return a.order - b.order;
+			});
+	}, [linksData, copyClickedLink]);
 
 	return (
 		<WithTooltip
 			placement="top"
 			closeOnOutsideClick
 			onVisibleChange={(state) => {
-				if (state && !links) {
+				if (state) {
 					onOpenTooltip();
 				}
 			}}

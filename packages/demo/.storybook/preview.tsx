@@ -38,6 +38,16 @@ const preview: Preview = {
 						icon: "GithubIcon",
 					};
 				},
+				"story-github-copy": ({ importPath, rootPath }) => {
+					if (!rootPath) return undefined;
+					const href = `https://github.com/elecdeer/storybook-addon-source-link/blob/-/packages/demo${importPath.replace(/^\./, "")}`;
+					return {
+						label: importPath,
+						href,
+						type: "copy",
+						icon: "GithubIcon",
+					};
+				},
 			},
 		} satisfies SourceLinkParameter,
 	},
