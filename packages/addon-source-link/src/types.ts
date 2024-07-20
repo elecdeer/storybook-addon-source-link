@@ -69,5 +69,16 @@ export type LinkEntry =
 			 * When order is specified, it will be sorted in ascending order. The default value is `0`.
 			 */
 			order?: number | undefined;
+
+			/**
+			 * The type of the link.
+			 *
+			 * - `"link"`: The link will be opened in the same tab.
+			 * - `"linkBlank"`: The link will be opened in a new tab. Added target="_blank" to the link.
+			 * - `"copy"`: The link will be copied to the clipboard.
+			 *
+			 * @default "linkBlank"
+			 */
+			type?: "link" | "linkBlank" | "copy" | undefined;
 	  }
 	| undefined;
