@@ -3,18 +3,12 @@ import {
 	TooltipLinkList,
 	WithTooltip,
 } from "@storybook/components";
-import { STORY_CHANGED } from "@storybook/core/core-events";
-import type { API_LeafEntry } from "@storybook/types";
+import { STORY_CHANGED } from "@storybook/core-events";
 import { CheckIcon, CopyIcon, JumpToIcon } from "@storybook/icons";
 import { useChannel, useStorybookApi } from "@storybook/manager-api";
 import { styled } from "@storybook/theming";
-import React, {
-	memo,
-	useCallback,
-	useMemo,
-	useState,
-	type ReactNode,
-} from "react";
+import type { API_LeafEntry } from "@storybook/types";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import type { LinkEntry } from "../types";
 import { StorybookIcon, isIconName } from "./StorybookIcon";
 import { resolveLinks } from "./resolveParameter";
