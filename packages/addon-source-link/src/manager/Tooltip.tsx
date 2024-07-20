@@ -2,12 +2,12 @@ import {
 	IconButton,
 	TooltipLinkList,
 	WithTooltip,
-} from "@storybook/core/components";
+} from "@storybook/components";
 import { STORY_CHANGED } from "@storybook/core/core-events";
-import { useChannel, useStorybookApi } from "@storybook/core/manager-api";
-import { styled } from "@storybook/core/theming";
-import type { API_LeafEntry } from "@storybook/core/types";
+import type { API_LeafEntry } from "@storybook/types";
 import { CheckIcon, CopyIcon, JumpToIcon } from "@storybook/icons";
+import { useChannel, useStorybookApi } from "@storybook/manager-api";
+import { styled } from "@storybook/theming";
 import React, {
 	memo,
 	useCallback,

@@ -1,5 +1,5 @@
 import { DocsContainer, type DocsContainerProps } from "@storybook/blocks";
-import type { Addon_DecoratorFunction, Renderer } from "@storybook/core/types";
+import type { Addon_DecoratorFunction, Renderer } from "@storybook/types";
 import { getFileUrl } from "./linkUtil";
 import type { SourceLinkParameter } from "./types";
 
