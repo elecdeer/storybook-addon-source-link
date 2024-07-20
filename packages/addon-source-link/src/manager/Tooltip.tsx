@@ -2,19 +2,13 @@ import {
 	IconButton,
 	TooltipLinkList,
 	WithTooltip,
-} from "@storybook/core/components";
-import { STORY_CHANGED } from "@storybook/core/core-events";
-import { useChannel, useStorybookApi } from "@storybook/core/manager-api";
-import { styled } from "@storybook/core/theming";
-import type { API_LeafEntry } from "@storybook/core/types";
+} from "@storybook/components";
+import { STORY_CHANGED } from "@storybook/core-events";
 import { CheckIcon, CopyIcon, JumpToIcon } from "@storybook/icons";
-import React, {
-	memo,
-	useCallback,
-	useMemo,
-	useState,
-	type ReactNode,
-} from "react";
+import { useChannel, useStorybookApi } from "@storybook/manager-api";
+import { styled } from "@storybook/theming";
+import type { API_LeafEntry } from "@storybook/types";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import type { LinkEntry } from "../types";
 import { StorybookIcon, isIconName } from "./StorybookIcon";
 import { resolveLinks } from "./resolveParameter";

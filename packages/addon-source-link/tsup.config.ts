@@ -29,9 +29,7 @@ export default defineConfig(async (options) => {
 	//     "nodeEntries": ["./src/preset.ts"]
 	//   }
 	// }
-	const packageJson = (await readFile("./package.json", "utf8").then(
-		JSON.parse,
-	)) as BundlerConfig;
+	const packageJson = await readFile("./package.json", "utf8").then(JSON.parse);
 	const {
 		bundler: {
 			exportEntries = [],
@@ -39,7 +37,10 @@ export default defineConfig(async (options) => {
 			previewEntries = [],
 			nodeEntries = [],
 		} = {},
-	} = packageJson;
+	} = packageJson as BundlerConfig;
+
+	const dependencies = Object.keys(packageJson.dependencies || {});
+	const devDependencies = Object.keys(packageJson.devDependencies || {});
 
 	const commonConfig: Options = {
 		splitting: false,
@@ -64,6 +65,7 @@ export default defineConfig(async (options) => {
 			format: ["esm", "cjs"],
 			target: [...BROWSER_TARGET, ...NODE_TARGET],
 			platform: "neutral",
+			external: [...dependencies, ...devDependencies],
 		});
 	}
 
@@ -77,6 +79,7 @@ export default defineConfig(async (options) => {
 			format: ["esm"],
 			target: BROWSER_TARGET,
 			platform: "browser",
+			external: [...dependencies, ...devDependencies],
 		});
 	}
 
@@ -87,12 +90,11 @@ export default defineConfig(async (options) => {
 		configs.push({
 			...commonConfig,
 			entry: previewEntries,
-			dts: {
-				resolve: true,
-			},
+			// dts: { resolve: true },
 			format: ["esm", "cjs"],
 			target: BROWSER_TARGET,
 			platform: "browser",
+			external: [...dependencies, ...devDependencies],
 		});
 	}
 

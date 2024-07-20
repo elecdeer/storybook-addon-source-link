@@ -1,5 +1,5 @@
-import { addons } from "@storybook/core/preview-api";
-import type { Addon_DecoratorFunction } from "@storybook/core/types";
+import { addons } from "@storybook/preview-api";
+import type { Addon_DecoratorFunction } from "@storybook/types";
 import { type FC, useEffect } from "react";
 import { EVENTS } from "../constants";
 import type {

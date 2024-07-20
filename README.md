@@ -6,14 +6,18 @@ This addon adds links to open the source code of story or components in your edi
 
 ## Getting started
 
+### Requirements
+
+- Storybook 8.0 or later
+
 ### 1. Install the addon.
 
 ```sh
-npm install -D my-addon
+npm install -D storybook-addon-source-link
 # or
-yarn add -D my-addon
+yarn add -D storybook-addon-source-link
 # or
-pnpm add -D my-addon
+pnpm add -D storybook-addon-source-link
 ```
 
 ### 2. Register the addon in your Storybook configuration.
@@ -67,7 +71,10 @@ const preview: Preview = {
         // add a new link type
         "story-github": ({ importPath, rootPath }) => {
           if (!rootPath) return undefined;
-          const href = `https://github.com/elecdeer/storybook-addon-source-link/blob/-/packages/demo${importPath.replace(/^\./, "")}`;
+          const href = `https://github.com/elecdeer/storybook-addon-source-link/blob/-/packages/demo${importPath.replace(
+            /^\./,
+            ""
+          )}`;
           return {
             label: importPath,
             href,
