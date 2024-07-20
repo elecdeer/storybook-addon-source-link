@@ -53,9 +53,21 @@ export type Resolvable<T> = ((context: ResolveContext) => T) | T;
 
 export type LinkEntry =
 	| {
+			/**
+			 * The label of the link.
+			 */
 			label: string;
+			/**
+			 * The URL of the link.
+			 */
 			href: string;
+			/**
+			 * The icon name in [@storybook/icons](https://main--64b56e737c0aeefed9d5e675.chromatic.com/?path=/docs/introduction--docs)
+			 */
 			icon?: IconName | undefined;
+			/**
+			 * When order is specified, it will be sorted in ascending order. The default value is `0`.
+			 */
 			order?: number | undefined;
 	  }
 	| undefined;
