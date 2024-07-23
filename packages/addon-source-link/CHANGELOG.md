@@ -1,5 +1,11 @@
 # storybook-addon-source-link
 
+## 0.2.1
+
+### Patch Changes
+
+- [#12](https://github.com/elecdeer/storybook-addon-source-link/pull/12) [`adeb9e4`](https://github.com/elecdeer/storybook-addon-source-link/commit/adeb9e466ab63b93e5ae780bcfc598a539eeba66) Thanks [@elecdeer](https://github.com/elecdeer)! - Fixed a bug causing unintended removal of enviriment variables #11
+
 ## 0.2.0
 
 ### Minor Changes
