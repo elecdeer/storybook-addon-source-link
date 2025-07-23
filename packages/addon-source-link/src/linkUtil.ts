@@ -1,4 +1,4 @@
-import { join, normalize, parse } from "path-browserify";
+import { join, normalize, parse } from "@std/path/posix";
 
 export const getFileUrl = (rootPath: string, importPath: string) => {
 	return new URL(`file:///${join(rootPath, importPath)}`);
@@ -7,7 +7,7 @@ export const getFileUrl = (rootPath: string, importPath: string) => {
 /**
  * Joins path segments into a path.
  */
-export const joinPath = (...paths: string[]): string => {
+export const joinPath = (...paths: [string, ...string[]]): string => {
 	return join(...paths);
 };
 
