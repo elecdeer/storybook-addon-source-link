@@ -1,17 +1,5 @@
 # storybook-addon-source-link
 
-## 0.2.2
-
-### Patch Changes
-
-- [#15](https://github.com/elecdeer/storybook-addon-source-link/pull/15) [`ef91ce4`](https://github.com/elecdeer/storybook-addon-source-link/commit/ef91ce446ed8289fcda9c05032b4703202b7c59f) Thanks [@elecdeer](https://github.com/elecdeer)! - Replace path-browserify with @std/path for modern compatibility
-
-  - Replace deprecated path-browserify with @std/path from JSR
-  - Update pnpm to v10.13.1 for better JSR support
-  - Improve TypeScript configuration for modern bundler workflow
-  - Remove @types/path-browserify dependency
-  - Move @std/path to devDependencies to ensure it gets bundled into the output
-
 ## 0.2.1
 
 ### Patch Changes
