@@ -1,17 +1,17 @@
+import { CheckIcon, CopyIcon, JumpToIcon } from "@storybook/icons";
+import { memo, useCallback, useMemo, useState } from "react";
 import {
 	IconButton,
 	TooltipLinkList,
 	WithTooltip,
-} from "@storybook/components";
-import { STORY_CHANGED } from "@storybook/core-events";
-import { CheckIcon, CopyIcon, JumpToIcon } from "@storybook/icons";
-import { useChannel, useStorybookApi } from "@storybook/manager-api";
-import { styled } from "@storybook/theming";
-import type { API_LeafEntry } from "@storybook/types";
-import React, { memo, useCallback, useMemo, useState } from "react";
+} from "storybook/internal/components";
+import { STORY_CHANGED } from "storybook/internal/core-events";
+import { useChannel, useStorybookApi } from "storybook/internal/manager-api";
+import type { API_LeafEntry } from "storybook/internal/types";
+import { styled } from "storybook/theming";
 import type { LinkEntry } from "../types";
-import { StorybookIcon, isIconName } from "./StorybookIcon";
 import { resolveLinks } from "./resolveParameter";
+import { isIconName, StorybookIcon } from "./StorybookIcon";
 
 const ColoredCopyIcon = styled(CopyIcon)`
 	fill: ${({ theme }) => theme.color.dark};
