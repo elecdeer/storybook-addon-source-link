@@ -19,7 +19,7 @@ export const Page: React.FC = () => {
 				onCreateAccount={() => setUser({ name: "Jane Doe" })}
 			/>
 
-			<section>
+			<section className="storybook-page">
 				<h2>Pages in Storybook</h2>
 				<p>
 					We recommend building UIs with a{" "}
@@ -50,7 +50,7 @@ export const Page: React.FC = () => {
 				<p>
 					Get a guided tutorial on component-driven development at{" "}
 					<a
-						href="renderers/react/template/cli/ts/Page"
+						href="https://storybook.js.org/tutorials/"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -68,7 +68,8 @@ export const Page: React.FC = () => {
 				</p>
 				<div className="tip-wrapper">
 					<span className="tip">Tip</span> Adjust the width of the canvas with
-					the{" "}
+					the
+					{/* * biome-ignore lint/a11y/noSvgWithoutTitle: template */}
 					<svg
 						width="10"
 						height="10"

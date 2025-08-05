@@ -6,17 +6,15 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "devDependencies": {
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "storybook": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:"
+  },
   "dependencies": {
     "react": "catalog:",
     "react-dom": "catalog:"
-  },
-  "devDependencies": {
-    "@storybook/addon-docs": "catalog:",
-    "@storybook/addon-links": "catalog:",
-    "@storybook/react-vite": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
-    "storybook": "8.1.11",
-    "storybook-addon-source-link": "workspace:*",
-    "vite": "catalog:"
   }
 }
