@@ -43,8 +43,8 @@
 		"storybook": "^9.0.0"
 	},
 	"dependencies": {
-		"@storybook/components": "catalog:",
 		"@storybook/icons": "catalog:",
+		"@storybook/addon-docs": "catalog:",
 		"react": "catalog:",
 		"react-dom": "catalog:"
 	},

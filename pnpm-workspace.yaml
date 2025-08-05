@@ -7,7 +7,6 @@ catalog:
   '@changesets/cli': ^2.29.5
   '@storybook/addon-docs': ^9.1.1
   '@storybook/addon-links': ^9.1.1
-  '@storybook/components': ^9.1.1
   '@storybook/icons': ^1.4.0
   '@storybook/react-vite': ^9.1.1
   '@types/node': ^20.19.9
