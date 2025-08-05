@@ -39,20 +39,17 @@
 		"lint": "biome check",
 		"type-check": "tsc --noEmit"
 	},
+	"peerDependencies": {
+		"storybook": "^9.0.0"
+	},
 	"dependencies": {
-		"@storybook/blocks": "catalog:",
 		"@storybook/components": "catalog:",
-		"@storybook/core-events": "catalog:",
 		"@storybook/icons": "catalog:",
-		"@storybook/manager-api": "catalog:",
-		"@storybook/preview-api": "catalog:",
-		"@storybook/theming": "catalog:",
 		"react": "catalog:",
 		"react-dom": "catalog:"
 	},
 	"devDependencies": {
 		"@std/path": "jsr:^1.1.1",
-		"@storybook/types": "catalog:",
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
