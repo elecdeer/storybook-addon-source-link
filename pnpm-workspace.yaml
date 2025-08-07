@@ -17,7 +17,6 @@ catalog:
   storybook: ^9.1.1
   tsup: ^8.5.0
   typescript: ^5.9.2
-  vite: ^5.4.19
   zx: ^8.8.0
 
 catalogMode: prefer
