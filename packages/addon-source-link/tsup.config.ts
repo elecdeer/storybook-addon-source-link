@@ -1,13 +1,18 @@
 import { readFile } from "node:fs/promises";
+import { globalPackages as globalManagerPackages } from "storybook/internal/manager/globals";
+import { globalPackages as globalPreviewPackages } from "storybook/internal/preview/globals";
 import { defineConfig, type Options } from "tsup";
 
-// The current browsers supported by Storybook v7
-const BROWSER_TARGET: Options["target"] = [
-	"chrome100",
-	"safari15",
-	"firefox91",
+const NODE_TARGET: Options["target"] = "node20";
+// https://github.com/storybookjs/storybook/blob/906ad720e2ca5ae07304601ea2d908055a86c86e/code/core/src/shared/constants/environments-support.ts
+const BROWSER_TARGETS: Options["target"] = [
+	"chrome131",
+	"edge134",
+	"firefox136",
+	"safari18.3",
+	"ios18.3",
+	"opera117",
 ];
-const NODE_TARGET: Options["target"] = ["node18"];
 
 type BundlerConfig = {
 	bundler?: {
@@ -18,7 +23,7 @@ type BundlerConfig = {
 	};
 };
 
-export default defineConfig(async (options) => {
+export default defineConfig(async () => {
 	// reading the three types of entries from package.json, which has the following structure:
 	// {
 	//  ...
@@ -29,7 +34,9 @@ export default defineConfig(async (options) => {
 	//     "nodeEntries": ["./src/preset.ts"]
 	//   }
 	// }
-	const packageJson = await readFile("./package.json", "utf8").then(JSON.parse);
+	const packageJson = (await readFile("./package.json", "utf8").then(
+		JSON.parse,
+	)) as BundlerConfig;
 	const {
 		bundler: {
 			exportEntries = [],
@@ -37,17 +44,16 @@ export default defineConfig(async (options) => {
 			previewEntries = [],
 			nodeEntries = [],
 		} = {},
-	} = packageJson as BundlerConfig;
-
-	const dependencies = Object.keys(packageJson.dependencies || {});
-	const devDependencies = Object.keys(packageJson.devDependencies || {});
+	} = packageJson;
 
 	const commonConfig: Options = {
 		splitting: false,
-		minify: !options.watch,
+		minify: false,
 		treeshake: true,
 		sourcemap: true,
-		clean: true,
+		// keep this line commented until https://github.com/egoist/tsup/issues/1270 is resolved
+		// clean: options.watch ? false : true,
+		clean: false,
 	};
 
 	const configs: Options[] = [];
@@ -63,9 +69,9 @@ export default defineConfig(async (options) => {
 				resolve: true,
 			},
 			format: ["esm", "cjs"],
-			target: [...BROWSER_TARGET, ...NODE_TARGET],
 			platform: "neutral",
-			external: [...dependencies, ...devDependencies],
+			target: NODE_TARGET,
+			external: [...globalManagerPackages, ...globalPreviewPackages],
 		});
 	}
 
@@ -77,9 +83,9 @@ export default defineConfig(async (options) => {
 			...commonConfig,
 			entry: managerEntries,
 			format: ["esm"],
-			target: BROWSER_TARGET,
 			platform: "browser",
-			external: [...dependencies, ...devDependencies],
+			target: BROWSER_TARGETS,
+			external: globalManagerPackages,
 		});
 	}
 
@@ -90,11 +96,13 @@ export default defineConfig(async (options) => {
 		configs.push({
 			...commonConfig,
 			entry: previewEntries,
-			// dts: { resolve: true },
+			dts: {
+				resolve: true,
+			},
 			format: ["esm", "cjs"],
-			target: BROWSER_TARGET,
 			platform: "browser",
-			external: [...dependencies, ...devDependencies],
+			target: BROWSER_TARGETS,
+			external: globalPreviewPackages,
 		});
 	}
 
