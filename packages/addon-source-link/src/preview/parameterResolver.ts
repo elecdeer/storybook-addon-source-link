@@ -1,6 +1,6 @@
-import { addons } from "@storybook/preview-api";
-import type { Addon_DecoratorFunction } from "@storybook/types";
 import { type FC, useEffect } from "react";
+import type { Addon_DecoratorFunction } from "storybook/internal/types";
+import { addons } from "storybook/preview-api";
 import { EVENTS } from "../constants";
 import type {
 	LinkEntry,

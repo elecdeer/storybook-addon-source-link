@@ -1,13 +1,18 @@
-import { DocsContainer, type DocsContainerProps } from "@storybook/blocks";
-import type { Addon_DecoratorFunction, Renderer } from "@storybook/types";
+import {
+	DocsContainer,
+	type DocsContainerProps,
+} from "@storybook/addon-docs/blocks";
+import type { PropsWithChildren } from "react";
+import type {
+	Addon_DecoratorFunction,
+	Renderer,
+} from "storybook/internal/types";
 import { getFileUrl } from "./linkUtil";
-import type { SourceLinkParameter } from "./types";
-
-import React, { type PropsWithChildren } from "react";
 import {
 	ParameterResolver,
 	withParameterResolver,
 } from "./preview/parameterResolver";
+import type { SourceLinkParameter } from "./types";
 
 export const parameters = {
 	sourceLink: {

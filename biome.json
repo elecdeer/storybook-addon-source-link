@@ -1,16 +1,17 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
 	"files": {
-		"ignore": [
-			"**/dist/*",
-			"node_modules/**/*",
-			"storybook-static/**/*",
-			"**/package.json"
+		"includes": [
+			"**",
+			"!**/dist/**/*",
+			"!**/node_modules/**/*",
+			"!**/storybook-static/**/*",
+			"!**/package.json"
 		]
 	},
 	"formatter": {
 		"enabled": true
 	},
-	"organizeImports": { "enabled": true },
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"linter": { "enabled": true, "rules": { "recommended": true } }
 }

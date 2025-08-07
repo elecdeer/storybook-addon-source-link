@@ -1,4 +1,4 @@
-import { addons } from "@storybook/manager-api";
+import { addons } from "storybook/manager-api";
 import { EVENTS } from "../constants";
 import type { LinkEntry, ResolveContext } from "../types";
 

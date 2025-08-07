@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { type Options, defineConfig } from "tsup";
+import { defineConfig, type Options } from "tsup";
 
 // The current browsers supported by Storybook v7
 const BROWSER_TARGET: Options["target"] = [

@@ -1,26 +1,20 @@
 {
-	"private": true,
-	"name": "demo",
-	"type": "module",
-	"scripts": {
-		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build"
-	},
-	"dependencies": {
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1"
-	},
-	"devDependencies": {
-		"@storybook/addon-essentials": "~8.1.0",
-		"@storybook/addon-interactions": "~8.1.0",
-		"@storybook/addon-links": "~8.1.0",
-		"@storybook/blocks": "~8.1.0",
-		"@storybook/react": "~8.1.0",
-		"@storybook/react-vite": "~8.1.0",
-		"@storybook/test": "~8.1.0",
-		"storybook": "~8.1.0",
-		"storybook-addon-source-link": "workspace:*",
-		"@vitejs/plugin-react": "^4.3.1",
-		"vite": "^5.3.3"
-	}
+  "private": true,
+  "name": "demo",
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "storybook": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
 }

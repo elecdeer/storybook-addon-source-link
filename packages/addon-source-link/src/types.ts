@@ -1,5 +1,5 @@
 import type * as iconsModule from "@storybook/icons";
-import type { API_LeafEntry } from "@storybook/types";
+import type { API_LeafEntry } from "storybook/internal/types";
 
 export type IconName = Exclude<keyof typeof iconsModule, "iconList">;
 
