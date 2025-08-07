@@ -53,7 +53,6 @@
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"npm-run-all": "catalog:",
 		"storybook": "catalog:",
 		"tsup": "catalog:"
 	},
