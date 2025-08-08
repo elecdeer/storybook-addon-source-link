@@ -1,5 +1,25 @@
 # storybook-addon-source-link
 
+## 1.0.0
+
+### Major Changes
+
+- [#21](https://github.com/elecdeer/storybook-addon-source-link/pull/21) [`e21c632`](https://github.com/elecdeer/storybook-addon-source-link/commit/e21c632a0e26748653d651bbfdb80233849a3bbc) Thanks [@elecdeer](https://github.com/elecdeer)! - feat: migrate to Storybook v9
+
+  This change updates the addon to support Storybook v9, which introduces several breaking changes:
+
+  - Updated peer dependency to require Storybook ^9.0.0
+  - Migrated demo package structure and configuration
+  - Updated all internal imports to use new Storybook v9 APIs
+  - Reorganized demo stories to follow new structure
+  - Updated dependencies and build configuration for compatibility
+
+  BREAKING CHANGE: This addon now requires Storybook v9 or later. Projects using older versions of Storybook will need to upgrade.
+
+### Patch Changes
+
+- [#27](https://github.com/elecdeer/storybook-addon-source-link/pull/27) [`68fa677`](https://github.com/elecdeer/storybook-addon-source-link/commit/68fa6771e259a99f029104d4efe68fa1b2d56f25) Thanks [@elecdeer](https://github.com/elecdeer)! - Remove unused npm-run-all dependency from package.json
+
 ## 0.2.2
 
 ### Patch Changes
