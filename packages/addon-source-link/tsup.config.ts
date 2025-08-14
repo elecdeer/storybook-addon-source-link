@@ -40,7 +40,9 @@ export default defineConfig(async (options) => {
 	} = packageJson as BundlerConfig;
 
 	const dependencies = Object.keys(packageJson.dependencies || {});
-	const devDependencies = Object.keys(packageJson.devDependencies || {});
+	const devDependencies = Object.keys(packageJson.devDependencies || {}).filter(
+		(item) => item.startsWith("@storybook/") || item === "storybook",
+	);
 
 	const commonConfig: Options = {
 		splitting: false,
