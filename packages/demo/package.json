@@ -9,7 +9,9 @@
     "test:build": "playwright test -c playwright.config.build.ts",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
-    "build-and-test": "pnpm build-storybook && pnpm test:build"
+    "build-and-test": "pnpm build-storybook && pnpm test:build",
+    "lint": "biome check",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@playwright/test": "catalog:",
