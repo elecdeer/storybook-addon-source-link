@@ -5,7 +5,7 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
 	testDir: "./tests",
-	testMatch: "dev.spec.ts",
+	testMatch: "build.spec.ts",
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -19,7 +19,7 @@ export default defineConfig({
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
-		baseURL: "http://localhost:6006",
+		baseURL: "http://localhost:6007",
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: "on-first-retry",
@@ -63,10 +63,10 @@ export default defineConfig({
 		// },
 	],
 
-	/* Run your local dev server before starting the tests */
+	/* Serve the built storybook static files */
 	webServer: {
-		command: "pnpm storybook",
-		url: "http://localhost:6006",
+		command: "npx serve storybook-static -l 6007",
+		url: "http://localhost:6007",
 		reuseExistingServer: !process.env.CI,
 	},
 });
