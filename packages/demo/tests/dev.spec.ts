@@ -41,7 +41,9 @@ test.describe("Storybook Demo", () => {
 		console.log("✅ Source-link addon tool is displayed in toolbar!");
 	});
 
-	test("should have correct link URLs in tooltip for Button story", async ({ page }) => {
+	test("should have correct link URLs in tooltip for Button story", async ({
+		page,
+	}) => {
 		// Buttonストーリーに直接移動
 		await page.goto("/?path=/story/example-button--primary");
 
@@ -106,7 +108,9 @@ test.describe("Storybook Demo", () => {
 		expect(linkCount).toBe(expectedLinkPatterns.length);
 	});
 
-	test("should have correct link URLs in tooltip for Configure docs", async ({ page }) => {
+	test("should have correct link URLs in tooltip for Configure docs", async ({
+		page,
+	}) => {
 		// Configure docsページに直接移動
 		await page.goto("/?path=/docs/configure-your-project--docs");
 
@@ -132,7 +136,7 @@ test.describe("Storybook Demo", () => {
 		// 実際のファイルパスを動的に構築（CIでも動作するように）
 		const projectRoot = process.cwd();
 		const configureMdxPath = resolve(projectRoot, "stories/Configure.mdx");
-		
+
 		const expectedLinkPatterns = [
 			{
 				title: "./stories/Configure.mdx",
@@ -170,7 +174,9 @@ test.describe("Storybook Demo", () => {
 		expect(linkCount).toBe(expectedLinkPatterns.length);
 	});
 
-	test("should have correct link URLs in tooltip for Button autodocs", async ({ page }) => {
+	test("should have correct link URLs in tooltip for Button autodocs", async ({
+		page,
+	}) => {
 		// Button autodocsページに直接移動
 		await page.goto("/?path=/docs/example-button--docs");
 
@@ -235,7 +241,9 @@ test.describe("Storybook Demo", () => {
 		expect(linkCount).toBe(expectedLinkPatterns.length);
 	});
 
-	test("should display custom links for Header WithCustomLinks story", async ({ page }) => {
+	test("should display custom links for Header WithCustomLinks story", async ({
+		page,
+	}) => {
 		// Header WithCustomLinksストーリーに直接移動
 		await page.goto("/?path=/story/example-header--with-custom-links");
 
@@ -276,8 +284,9 @@ test.describe("Storybook Demo", () => {
 				expectedHref: "./stories/Header.tsx",
 			},
 			{
-				title: "Open Header on GitHub", 
-				expectedHref: "https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo/stories/Header.tsx",
+				title: "Open Header on GitHub",
+				expectedHref:
+					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo/stories/Header.tsx",
 			},
 			{
 				title: "Custom external link",
@@ -286,9 +295,13 @@ test.describe("Storybook Demo", () => {
 		];
 
 		// カスタムリンクが含まれていることを確認（Copy import pathを除く）
-		const nonCopyLinks = expectedCustomLinks.filter(link => link.title !== "Copy import path");
+		const nonCopyLinks = expectedCustomLinks.filter(
+			(link) => link.title !== "Copy import path",
+		);
 		for (const expectedLink of nonCopyLinks) {
-			const foundLink = actualLinks.find(link => link.title === expectedLink.title);
+			const foundLink = actualLinks.find(
+				(link) => link.title === expectedLink.title,
+			);
 			expect(foundLink).toBeTruthy();
 			expect(foundLink?.href).toBe(expectedLink.expectedHref);
 		}
@@ -296,23 +309,35 @@ test.describe("Storybook Demo", () => {
 		// Copy import pathリンクは現在表示されていないため、他のカスタムリンクの存在を確認
 
 		// デフォルトリンクも含まれていることを確認
-		const storyLink = actualLinks.find(link => link.title === "./stories/Header.stories.ts");
+		const storyLink = actualLinks.find(
+			(link) => link.title === "./stories/Header.stories.ts",
+		);
 		expect(storyLink).toBeTruthy();
 		expect(storyLink?.href).toContain("vscode://file://");
 
-		const componentLink = actualLinks.find(link => link.title === "./stories/Header.tsx");
+		const componentLink = actualLinks.find(
+			(link) => link.title === "./stories/Header.tsx",
+		);
 		expect(componentLink).toBeTruthy();
 		expect(componentLink?.href).toContain("vscode://file://");
 
 		// "Powered by" リンクの確認
-		const poweredByLink = actualLinks.find(link => link.title === "Powered by addon-source-link");
+		const poweredByLink = actualLinks.find(
+			(link) => link.title === "Powered by addon-source-link",
+		);
 		expect(poweredByLink).toBeTruthy();
-		expect(poweredByLink?.href).toBe("https://github.com/elecdeer/storybook-addon-source-link");
+		expect(poweredByLink?.href).toBe(
+			"https://github.com/elecdeer/storybook-addon-source-link",
+		);
 
-		console.log("✅ Custom links are displayed correctly in Header WithCustomLinks story!");
+		console.log(
+			"✅ Custom links are displayed correctly in Header WithCustomLinks story!",
+		);
 	});
 
-	test("should display function-based links for Header WithFunctionLinks story", async ({ page }) => {
+	test("should display function-based links for Header WithFunctionLinks story", async ({
+		page,
+	}) => {
 		// Header WithFunctionLinksストーリーに直接移動
 		await page.goto("/?path=/story/example-header--with-function-links");
 
@@ -350,30 +375,40 @@ test.describe("Storybook Demo", () => {
 		const expectedFunctionLinks = [
 			{
 				title: "GitHub (Dev Mode)",
-				expectedHref: "https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo./stories/Header.stories.ts",
+				expectedHref:
+					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo./stories/Header.stories.ts",
 			},
 			{
-				title: "Dev Only Link", 
+				title: "Dev Only Link",
 				expectedHref: "https://localhost:6006",
 			},
 			{
 				title: "Story: With Function Links",
-				expectedHref: "https://example.com/story/example-header--with-function-links",
+				expectedHref:
+					"https://example.com/story/example-header--with-function-links",
 			},
 		];
 
 		// 関数型リンクが含まれていることを確認
 		for (const expectedLink of expectedFunctionLinks) {
-			const foundLink = actualLinks.find(link => link.title === expectedLink.title);
+			const foundLink = actualLinks.find(
+				(link) => link.title === expectedLink.title,
+			);
 			expect(foundLink).toBeTruthy();
 			expect(foundLink?.href).toBe(expectedLink.expectedHref);
 		}
 
 		// "Powered by" リンクの確認
-		const poweredByLink = actualLinks.find(link => link.title === "Powered by addon-source-link");
+		const poweredByLink = actualLinks.find(
+			(link) => link.title === "Powered by addon-source-link",
+		);
 		expect(poweredByLink).toBeTruthy();
-		expect(poweredByLink?.href).toBe("https://github.com/elecdeer/storybook-addon-source-link");
+		expect(poweredByLink?.href).toBe(
+			"https://github.com/elecdeer/storybook-addon-source-link",
+		);
 
-		console.log("✅ Function-based links are displayed correctly in Header WithFunctionLinks story!");
+		console.log(
+			"✅ Function-based links are displayed correctly in Header WithFunctionLinks story!",
+		);
 	});
 });

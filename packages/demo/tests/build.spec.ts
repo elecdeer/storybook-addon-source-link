@@ -153,7 +153,7 @@ test.describe("Storybook Demo (Build)", () => {
 		await page.waitForLoadState("networkidle");
 
 		// Docs tabをクリック（最初のリンクを選択）
-		await page.getByRole('link', { name: 'Docs' }).click();
+		await page.getByRole("link", { name: "Docs" }).click();
 		await page.waitForLoadState("networkidle");
 
 		// source-linkアドオンのツールボタンをクリック
@@ -204,7 +204,9 @@ test.describe("Storybook Demo (Build)", () => {
 		await page.waitForLoadState("networkidle");
 
 		// WithCustomLinksストーリーに移動（ストーリー一覧から選択）
-		await page.locator('[data-item-id="example-header--with-custom-links"]').click();
+		await page
+			.locator('[data-item-id="example-header--with-custom-links"]')
+			.click();
 		await page.waitForURL(/.*with-custom-links.*/i, { timeout: 10000 });
 		await page.waitForLoadState("networkidle");
 
@@ -241,8 +243,9 @@ test.describe("Storybook Demo (Build)", () => {
 		// 期待されるカスタムリンクの検証
 		const expectedCustomLinks = [
 			{
-				title: "Open Header on GitHub", 
-				expectedHref: "https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo/stories/Header.tsx",
+				title: "Open Header on GitHub",
+				expectedHref:
+					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo/stories/Header.tsx",
 			},
 			{
 				title: "Custom external link",
@@ -252,15 +255,21 @@ test.describe("Storybook Demo (Build)", () => {
 
 		// カスタムリンクが含まれていることを確認
 		for (const expectedLink of expectedCustomLinks) {
-			const foundLink = actualLinks.find(link => link.title === expectedLink.title);
+			const foundLink = actualLinks.find(
+				(link) => link.title === expectedLink.title,
+			);
 			expect(foundLink).toBeTruthy();
 			expect(foundLink?.href).toBe(expectedLink.expectedHref);
 		}
 
 		// "Powered by" リンクの確認
-		const poweredByLink = actualLinks.find(link => link.title === "Powered by addon-source-link");
+		const poweredByLink = actualLinks.find(
+			(link) => link.title === "Powered by addon-source-link",
+		);
 		expect(poweredByLink).toBeTruthy();
-		expect(poweredByLink?.href).toBe("https://github.com/elecdeer/storybook-addon-source-link");
+		expect(poweredByLink?.href).toBe(
+			"https://github.com/elecdeer/storybook-addon-source-link",
+		);
 
 		console.log(
 			"✅ Custom links and 'Powered by addon-source-link' link displayed in static build for Header WithCustomLinks story",
@@ -280,7 +289,9 @@ test.describe("Storybook Demo (Build)", () => {
 		await page.waitForLoadState("networkidle");
 
 		// WithFunctionLinksストーリーに移動（ストーリー一覧から選択）
-		await page.locator('[data-item-id="example-header--with-function-links"]').click();
+		await page
+			.locator('[data-item-id="example-header--with-function-links"]')
+			.click();
 		await page.waitForURL(/.*with-function-links.*/i, { timeout: 10000 });
 		await page.waitForLoadState("networkidle");
 
@@ -318,29 +329,39 @@ test.describe("Storybook Demo (Build)", () => {
 		const expectedFunctionLinks = [
 			{
 				title: "GitHub (Static Build)",
-				expectedHref: "https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo./stories/Header.stories.ts",
+				expectedHref:
+					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo./stories/Header.stories.ts",
 			},
 			{
 				title: "Story: With Function Links",
-				expectedHref: "https://example.com/story/example-header--with-function-links",
+				expectedHref:
+					"https://example.com/story/example-header--with-function-links",
 			},
 		];
 
 		// 関数型リンクが含まれていることを確認
 		for (const expectedLink of expectedFunctionLinks) {
-			const foundLink = actualLinks.find(link => link.title === expectedLink.title);
+			const foundLink = actualLinks.find(
+				(link) => link.title === expectedLink.title,
+			);
 			expect(foundLink).toBeTruthy();
 			expect(foundLink?.href).toBe(expectedLink.expectedHref);
 		}
 
 		// "Dev Only Link"は静的ビルドでは表示されないことを確認
-		const devOnlyLink = actualLinks.find(link => link.title === "Dev Only Link");
+		const devOnlyLink = actualLinks.find(
+			(link) => link.title === "Dev Only Link",
+		);
 		expect(devOnlyLink).toBeFalsy();
 
 		// "Powered by" リンクの確認
-		const poweredByLink = actualLinks.find(link => link.title === "Powered by addon-source-link");
+		const poweredByLink = actualLinks.find(
+			(link) => link.title === "Powered by addon-source-link",
+		);
 		expect(poweredByLink).toBeTruthy();
-		expect(poweredByLink?.href).toBe("https://github.com/elecdeer/storybook-addon-source-link");
+		expect(poweredByLink?.href).toBe(
+			"https://github.com/elecdeer/storybook-addon-source-link",
+		);
 
 		console.log(
 			"✅ Function-based links are displayed correctly in static build for Header WithFunctionLinks story",
