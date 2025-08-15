@@ -245,7 +245,7 @@ test.describe("Storybook Demo (Build)", () => {
 			{
 				title: "Open Header on GitHub",
 				expectedHref:
-					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo/stories/Header.tsx",
+					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/e2e/stories/Header.tsx",
 			},
 			{
 				title: "Custom external link",
@@ -330,7 +330,7 @@ test.describe("Storybook Demo (Build)", () => {
 			{
 				title: "GitHub (Static Build)",
 				expectedHref:
-					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo./stories/Header.stories.ts",
+					"https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/e2e/stories/Header.stories.ts",
 			},
 			{
 				title: "Story: With Function Links",

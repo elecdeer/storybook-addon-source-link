@@ -49,7 +49,7 @@ export const WithCustomLinks: Story = {
 				// カスタムリンクを追加
 				"header-github": {
 					label: "Open Header on GitHub",
-					href: "https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo/stories/Header.tsx",
+					href: "https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/e2e/stories/Header.tsx",
 					icon: "GithubIcon",
 					order: 1,
 				},
@@ -89,14 +89,14 @@ export const WithFunctionLinks: Story = {
 					if (isStaticBuild) {
 						return {
 							label: "GitHub (Static Build)",
-							href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo${importPath}`,
+							href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/e2e${importPath}`,
 							icon: "GithubIcon",
 							order: 1,
 						};
 					}
 					return {
 						label: "GitHub (Dev Mode)",
-						href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/demo${importPath}`,
+						href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/e2e${importPath}`,
 						icon: "GithubIcon",
 						order: 1,
 					};
