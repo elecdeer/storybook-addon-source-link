@@ -9,9 +9,10 @@
   "devDependencies": {
     "@storybook/addon-docs": "catalog:",
     "@storybook/react-vite": "catalog:",
-    "storybook": "catalog:",
     "@types/react": "catalog:",
-    "@types/react-dom": "catalog:"
+    "@types/react-dom": "catalog:",
+    "storybook": "catalog:",
+    "storybook-addon-source-link": "workspace:*"
   },
   "dependencies": {
     "react": "catalog:",
