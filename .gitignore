@@ -5,3 +5,7 @@ build-storybook.log
 .DS_Store
 .env
 *storybook.log
+
+# Playwright
+playwright-report/
+test-results/
