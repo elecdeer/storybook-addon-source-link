@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "e2e",
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test:dev": "playwright test",
+    "test:build": "playwright test -c playwright.config.build.ts",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "build-and-test": "pnpm build-storybook && pnpm test:build",
+    "lint": "biome check",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "serve": "^14.2.4",
+    "storybook": "catalog:",
+    "storybook-addon-source-link": "workspace:*"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
+}
