@@ -71,7 +71,7 @@ const preview: Preview = {
         // add a new link type
         "story-github": ({ importPath, rootPath }) => {
           if (!rootPath) return undefined;
-          const href = `https://github.com/elecdeer/storybook-addon-source-link/blob/-/packages/demo${importPath.replace(
+          const href = `https://github.com/elecdeer/storybook-addon-source-link/blob/-/packages/e2e${importPath.replace(
             /^\./,
             ""
           )}`;
