@@ -1,5 +1,11 @@
 # storybook-addon-source-link
 
+## 0.2.3
+
+### Patch Changes
+
+- [#41](https://github.com/elecdeer/storybook-addon-source-link/pull/41) [`33899b9`](https://github.com/elecdeer/storybook-addon-source-link/commit/33899b9edb082b0af902f17a6bf294a31b57ef9e) Thanks [@elecdeer](https://github.com/elecdeer)! - Bundled the previously missing `jsr:@std/path` package.
+
 ## 0.2.2
 
 ### Patch Changes
