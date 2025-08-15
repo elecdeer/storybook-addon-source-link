@@ -84,7 +84,7 @@ test.describe("Storybook Demo", () => {
 			},
 		];
 
-		// 各リンクのURLを実際のパスで検証
+		// 各リンクのURLを実際のパスで検証（順番は固定）
 		for (let i = 0; i < linkCount; i++) {
 			const link = links.nth(i);
 			const href =
@@ -96,12 +96,10 @@ test.describe("Storybook Demo", () => {
 			expect(href).toBeTruthy();
 			expect(title).toBeTruthy();
 
-			// 期待されるパターンの中から一致するものを探す
-			const expectedPattern = expectedLinkPatterns.find(
-				(pattern) => pattern.title === title && pattern.expectedHref === href,
-			);
-
-			expect(expectedPattern).toBeTruthy();
+			// 順番に基づいて期待される値と比較
+			const expectedPattern = expectedLinkPatterns[i];
+			expect(title).toBe(expectedPattern.title);
+			expect(href).toBe(expectedPattern.expectedHref);
 		}
 
 		// 期待される数のリンクが存在することを確認
