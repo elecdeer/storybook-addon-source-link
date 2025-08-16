@@ -36,7 +36,18 @@ jobs:
             }
             
             function getChangedChangesetFiles() {
-              const changedFiles = execCommand('git diff --name-only HEAD~1 HEAD').split('\n');
+              // Get PR base branch and ensure it's fetched
+              const baseSha = context.payload.pull_request.base.sha;
+              const baseBranch = context.payload.pull_request.base.ref;
+              
+              try {
+                execCommand(`git fetch origin ${baseBranch}`);
+              } catch (error) {
+                console.log(`Warning: Could not fetch base branch ${baseBranch}:`, error.message);
+              }
+              
+              // Compare entire PR (base to HEAD) instead of just last commit
+              const changedFiles = execCommand(`git diff --name-only ${baseSha}..HEAD`).split('\n');
               return changedFiles.filter(file => 
                 file.startsWith('.changeset/') && 
                 file.endsWith('.md') && 
@@ -48,19 +59,26 @@ jobs:
               if (changesetFiles.length === 0) return false;
               
               try {
-                const changesetCommit = execCommand(
-                  "git log --oneline --follow --diff-filter=A HEAD~1..HEAD -- '.changeset/*.md'"
-                ).split('\n')[0];
+                // Check each changeset file to see if any were created by a bot
+                for (const changesetFile of changesetFiles) {
+                  console.log(`Checking author of changeset file: ${changesetFile}`);
+                  
+                  // Get the author who added this specific file
+                  const commitAuthor = execCommand(
+                    `git log -n 1 --format="%an" --diff-filter=A -- ${changesetFile}`
+                  );
+                  
+                  console.log(`Author of ${changesetFile}: ${commitAuthor}`);
+                  
+                  const isBotCreated = commitAuthor === 'GitHub Action' || commitAuthor.includes('[bot]');
+                  if (isBotCreated) {
+                    console.log(`Found bot-created changeset: ${changesetFile}`);
+                    return true;
+                  }
+                }
                 
-                if (!changesetCommit) return false;
-                
-                const commitHash = changesetCommit.split(' ')[0];
-                const commitAuthor = execCommand(`git log --format="%an" -n 1 ${commitHash}`);
-                
-                const isBotCreated = commitAuthor === 'GitHub Action' || commitAuthor.includes('[bot]');
-                console.log(`Changeset author: ${commitAuthor}, bot created: ${isBotCreated}`);
-                
-                return isBotCreated;
+                console.log('No bot-created changesets found');
+                return false;
               } catch (error) {
                 console.log('Error checking changeset author:', error.message);
                 return false;
