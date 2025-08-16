@@ -8,7 +8,7 @@ This addon adds links to open the source code of story or components in your edi
 
 ### Requirements
 
-- Storybook 8.0 or later
+- Storybook 9.0 or later
 
 ### 1. Install the addon.
 
