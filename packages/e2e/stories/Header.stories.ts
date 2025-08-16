@@ -5,6 +5,7 @@ import type {
 	ResolveContext,
 	SourceLinkParameter,
 } from "storybook-addon-source-link";
+import { joinPath } from "storybook-addon-source-link";
 
 import { Header } from "./Header";
 
@@ -92,14 +93,14 @@ export const WithFunctionLinks: Story = {
 					if (isStaticBuild) {
 						return {
 							label: "GitHub (Static Build)",
-							href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/e2e${importPath}`,
+							href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/${joinPath("packages/e2e", importPath)}`,
 							icon: "GithubIcon",
 							order: 1,
 						};
 					}
 					return {
 						label: "GitHub (Dev Mode)",
-						href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/packages/e2e${importPath}`,
+						href: `https://github.com/elecdeer/storybook-addon-source-link/blob/main/${joinPath("packages/e2e", importPath)}`,
 						icon: "GithubIcon",
 						order: 1,
 					};
