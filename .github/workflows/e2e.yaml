@@ -38,6 +38,9 @@ jobs:
       - name: Run E2E tests (dev)
         run: pnpm --filter e2e run test:dev
 
+      - name: Build Storybook for static testing
+        run: pnpm --filter e2e run build-storybook
+
       - name: Run E2E tests (build)
         run: pnpm --filter e2e run test:build
 
