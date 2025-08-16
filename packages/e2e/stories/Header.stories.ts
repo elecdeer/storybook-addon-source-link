@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { fn } from "storybook/test";
-import type { SourceLinkParameter } from "storybook-addon-source-link";
+import type {
+	ResolveContext,
+	SourceLinkParameter,
+} from "storybook-addon-source-link";
 
 import { Header } from "./Header";
 
@@ -85,7 +88,7 @@ export const WithFunctionLinks: Story = {
 				"component-vscode": undefined,
 				"story-vscode": undefined,
 				// 関数型リンクを追加
-				"dynamic-github": ({ importPath, isStaticBuild }) => {
+				"dynamic-github": ({ importPath, isStaticBuild }: ResolveContext) => {
 					if (isStaticBuild) {
 						return {
 							label: "GitHub (Static Build)",
@@ -101,7 +104,7 @@ export const WithFunctionLinks: Story = {
 						order: 1,
 					};
 				},
-				"conditional-link": ({ isStaticBuild }) => {
+				"conditional-link": ({ isStaticBuild }: ResolveContext) => {
 					if (isStaticBuild) {
 						return undefined; // 静的ビルドでは表示しない
 					}
@@ -112,7 +115,7 @@ export const WithFunctionLinks: Story = {
 						order: 2,
 					};
 				},
-				"context-aware": ({ name, id }) => ({
+				"context-aware": ({ name, id }: ResolveContext) => ({
 					label: `Story: ${name}`,
 					href: `https://example.com/story/${id}`,
 					icon: "BookIcon",

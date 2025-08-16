@@ -1,2 +1,2 @@
 export * from "./linkUtil";
-export type { SourceLinkParameter } from "./types";
+export type { ResolveContext, SourceLinkParameter } from "./types";
