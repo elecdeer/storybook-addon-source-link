@@ -1,10 +1,6 @@
 name: E2E Tests
 
 on:
-  push:
-    branches:
-      - main
-      - ci/e2e
   pull_request:
 
 concurrency: 
