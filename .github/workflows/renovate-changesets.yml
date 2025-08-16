@@ -1,0 +1,146 @@
+name: Add Changeset to Renovate PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  add-changeset:
+    if: ${{ startsWith(github.head_ref, 'renovate/') }}
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Check and create changeset
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const { execSync } = require('child_process');
+            
+            const CHANGESET_DIR = '.changeset';
+            const PACKAGE_NAME = 'storybook-addon-source-link';
+            
+            function execCommand(command) {
+              return execSync(command, { encoding: 'utf8' }).trim();
+            }
+            
+            function getChangedChangesetFiles() {
+              // Get PR base branch and ensure it's fetched
+              const baseSha = context.payload.pull_request.base.sha;
+              const baseBranch = context.payload.pull_request.base.ref;
+              
+              try {
+                execCommand(`git fetch origin ${baseBranch}`);
+              } catch (error) {
+                console.log(`Warning: Could not fetch base branch ${baseBranch}:`, error.message);
+              }
+              
+              // Compare entire PR (base to HEAD) instead of just last commit
+              const changedFiles = execCommand(`git diff --name-only ${baseSha}..HEAD`).split('\n');
+              return changedFiles.filter(file => 
+                file.startsWith('.changeset/') && 
+                file.endsWith('.md') && 
+                !file.includes('README.md')
+              );
+            }
+            
+            function isChangesetCreatedByBot(changesetFiles) {
+              if (changesetFiles.length === 0) return false;
+              
+              try {
+                // Check each changeset file to see if any were created by a bot
+                for (const changesetFile of changesetFiles) {
+                  console.log(`Checking author of changeset file: ${changesetFile}`);
+                  
+                  // Get the author who added this specific file
+                  const commitAuthor = execCommand(
+                    `git log -n 1 --format="%an" --diff-filter=A -- ${changesetFile}`
+                  );
+                  
+                  console.log(`Author of ${changesetFile}: ${commitAuthor}`);
+                  
+                  const isBotCreated = commitAuthor === 'GitHub Action' || commitAuthor.includes('[bot]');
+                  if (isBotCreated) {
+                    console.log(`Found bot-created changeset: ${changesetFile}`);
+                    return true;
+                  }
+                }
+                
+                console.log('No bot-created changesets found');
+                return false;
+              } catch (error) {
+                console.log('Error checking changeset author:', error.message);
+                return false;
+              }
+            }
+            
+            function createChangesetContent(commitMessage) {
+              return [
+                '---',
+                `"${PACKAGE_NAME}": patch`,
+                '---',
+                '',
+                commitMessage,
+                ''
+              ].join('\n');
+            }
+            
+            function setupGitConfig() {
+              execCommand('git config --local user.email "action@github.com"');
+              execCommand('git config --local user.name "GitHub Action"');
+            }
+            
+            function commitAndPush() {
+              execCommand('git add .changeset/');
+              
+              try {
+                execCommand('git diff --staged --quiet');
+                console.log('No changeset to commit');
+              } catch (error) {
+                execCommand('git commit -m "chore: add changeset for renovate PR"');
+                execCommand(`git push origin ${context.payload.pull_request.head.ref}`);
+                console.log('Changeset committed and pushed');
+              }
+            }
+            
+            // Main logic
+            const stagedChangesets = getChangedChangesetFiles();
+            console.log(`Found ${stagedChangesets.length} staged changeset files`);
+            
+            const botCreated = isChangesetCreatedByBot(stagedChangesets);
+            
+            // Determine action based on changeset state
+            if (stagedChangesets.length > 0 && !botCreated) {
+              console.log('Human-created changeset exists, skipping');
+              return;
+            }
+            
+            const commitMessage = execCommand('git log --format="%s" -n 1');
+            console.log(`Commit message: ${commitMessage}`);
+            
+            const changesetContent = createChangesetContent(commitMessage);
+            
+            let changesetPath;
+            if (botCreated && stagedChangesets.length > 0) {
+              changesetPath = stagedChangesets[0];
+              console.log(`Overwriting bot-created changeset: ${changesetPath}`);
+            } else {
+              const timestamp = Date.now();
+              changesetPath = path.join(CHANGESET_DIR, `renovate-${timestamp}.md`);
+              console.log(`Creating new changeset: ${changesetPath}`);
+            }
+            
+            fs.writeFileSync(changesetPath, changesetContent);
+            setupGitConfig();
+            commitAndPush();
