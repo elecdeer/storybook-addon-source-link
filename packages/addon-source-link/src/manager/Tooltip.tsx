@@ -21,9 +21,21 @@ const ColoredCheckIcon = styled(CheckIcon)`
 	fill: ${({ theme }) => theme.color.dark};
 `;
 
+const checkIsStaticBuild = (): boolean => {
+	try {
+		// @ts-ignore storybook sets window.CONFIG_TYPE
+		return window.CONFIG_TYPE !== "DEVELOPMENT";
+	} catch {
+		console.warn(
+			"[storybook-addon-source-link] window.CONFIG_TYPE is not defined. The value of isStaticBuild may be incorrect.",
+		);
+		return process.env.NODE_ENV === "production";
+	}
+};
+
 export const Tool = memo(function MyAddonSelector() {
 	const rootPath = process.env.SOURCE_LINK_PROJECT_ROOT_PATH ?? "";
-	const isStaticBuild = process.env.NODE_ENV === "production";
+	const isStaticBuild = checkIsStaticBuild();
 
 	const api = useStorybookApi();
 	const storyData = api.getCurrentStoryData() as API_LeafEntry | undefined;
