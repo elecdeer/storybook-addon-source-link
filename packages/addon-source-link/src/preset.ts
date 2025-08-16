@@ -6,8 +6,7 @@
 import type { PresetProperty } from "storybook/internal/types";
 
 export const env: PresetProperty<"env"> = (base, _config) => {
-	// If NODE_ENV is set to production, Storybook is being executed with a static build.
-	if (process.env.NODE_ENV === "production") {
+	if (_config.configType !== "DEVELOPMENT") {
 		return {
 			...base,
 			SOURCE_LINK_PROJECT_ROOT_PATH: "",
