@@ -1,5 +1,69 @@
 # storybook-addon-source-link
 
+## 1.0.0
+
+### Major Changes
+
+- [#21](https://github.com/elecdeer/storybook-addon-source-link/pull/21) [`e21c632`](https://github.com/elecdeer/storybook-addon-source-link/commit/e21c632a0e26748653d651bbfdb80233849a3bbc) Thanks [@elecdeer](https://github.com/elecdeer)! - feat: migrate to Storybook v9
+
+  This change updates the addon to support Storybook v9, which introduces several breaking changes:
+
+  - Updated peer dependency to require Storybook ^9.0.0
+  - Migrated demo package structure and configuration
+  - Updated all internal imports to use new Storybook v9 APIs
+  - Reorganized demo stories to follow new structure
+  - Updated dependencies and build configuration for compatibility
+
+  BREAKING CHANGE: This addon now requires Storybook v9 or later. Projects using older versions of Storybook will need to upgrade.
+
+### Minor Changes
+
+- [#43](https://github.com/elecdeer/storybook-addon-source-link/pull/43) [`57bf147`](https://github.com/elecdeer/storybook-addon-source-link/commit/57bf1476c77748b84f58fd7405976fbd4839fbf4) Thanks [@elecdeer](https://github.com/elecdeer)! - feat: add comprehensive E2E testing with Playwright
+
+  This change adds comprehensive end-to-end testing capabilities to verify the addon functionality in both development and build environments:
+
+  - Add Playwright testing framework with full E2E test suite
+  - Create separate test configurations for dev and build environments
+  - Add automated link validation for source code links in all story contexts
+  - Test custom link parameters and function-based link generation
+  - Add comprehensive coverage for Button, Header, Page, and Configure stories
+  - Verify 'Powered by addon-source-link' display functionality
+  - Add test scripts for dev, build, and UI test modes
+  - All tests pass in both development (5/5) and production build (5/5) environments
+
+  The E2E tests ensure the addon works correctly across different Storybook environments and validates that source links are properly generated and functional.
+
+### Patch Changes
+
+- [#47](https://github.com/elecdeer/storybook-addon-source-link/pull/47) [`7345627`](https://github.com/elecdeer/storybook-addon-source-link/commit/73456277284a911cb02f18c80db31154552d6f8e) Thanks [@elecdeer](https://github.com/elecdeer)! - Improve static build detection using Storybook CONFIG_TYPE
+
+  Replace NODE_ENV-based detection with more accurate Storybook-specific environment variables. This provides more reliable build environment detection and adds proper warning when CONFIG_TYPE is unavailable for better debugging.
+
+- [#43](https://github.com/elecdeer/storybook-addon-source-link/pull/43) [`57bf147`](https://github.com/elecdeer/storybook-addon-source-link/commit/57bf1476c77748b84f58fd7405976fbd4839fbf4) Thanks [@elecdeer](https://github.com/elecdeer)! - chore: improve code quality and development tooling
+
+  Enhance development experience and code quality with improved tooling:
+
+  - Add lint and type-check scripts to e2e package for better development workflow
+  - Format all files with Biome for consistent code style
+  - Add serve dependency for static file serving during build tests
+  - Update pnpm-lock.yaml with new dependencies for testing infrastructure
+
+  These improvements provide better developer experience with consistent formatting, type checking, and linting capabilities across the project.
+
+- [#43](https://github.com/elecdeer/storybook-addon-source-link/pull/43) [`57bf147`](https://github.com/elecdeer/storybook-addon-source-link/commit/57bf1476c77748b84f58fd7405976fbd4839fbf4) Thanks [@elecdeer](https://github.com/elecdeer)! - refactor: rename demo package to e2e for clarity
+
+  Restructure the demo package to better reflect its primary purpose as an E2E testing environment:
+
+  - Rename packages/demo directory to packages/e2e
+  - Update package name from "demo" to "e2e" in package.json
+  - Update root package.json scripts to reference e2e package
+  - Update README.md documentation to use e2e path examples
+  - Clean up old demo package directory after successful migration
+
+  This change provides better semantic clarity as the package is primarily used for end-to-end testing of the addon functionality rather than just demonstration purposes.
+
+- [#27](https://github.com/elecdeer/storybook-addon-source-link/pull/27) [`68fa677`](https://github.com/elecdeer/storybook-addon-source-link/commit/68fa6771e259a99f029104d4efe68fa1b2d56f25) Thanks [@elecdeer](https://github.com/elecdeer)! - Remove unused npm-run-all dependency from package.json
+
 ## 0.2.2
 
 ### Patch Changes
