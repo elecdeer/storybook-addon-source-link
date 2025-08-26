@@ -12,6 +12,20 @@
 	"formatter": {
 		"enabled": true
 	},
-	"assist": { "actions": { "source": { "organizeImports": "on" } } },
-	"linter": { "enabled": true, "rules": { "recommended": true } }
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		}
+	},
+	"javascript": {
+		"jsxRuntime": "reactClassic"
+	}
 }
