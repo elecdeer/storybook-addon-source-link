@@ -1,5 +1,13 @@
 # storybook-addon-source-link
 
+## 1.0.1
+
+### Patch Changes
+
+- [#51](https://github.com/elecdeer/storybook-addon-source-link/pull/51) [`7bbafca`](https://github.com/elecdeer/storybook-addon-source-link/commit/7bbafcaf1163fa4c9c5bf503e5c1cc0842c91da2) Thanks [@elecdeer](https://github.com/elecdeer)! - Fix JSX transform compatibility with React 19
+
+  Change JSX setting from "react-jsx" to "react" to ensure compatibility with packages using React 19, which may not work correctly with the newer JSX transform.
+
 ## 1.0.0
 
 ### Major Changes
