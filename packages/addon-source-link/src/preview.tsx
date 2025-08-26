@@ -3,6 +3,7 @@ import {
 	type DocsContainerProps,
 } from "@storybook/addon-docs/blocks";
 import type { PropsWithChildren } from "react";
+import React from "react";
 import type {
 	Addon_DecoratorFunction,
 	Renderer,

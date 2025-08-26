@@ -1,5 +1,6 @@
 import * as iconsModule from "@storybook/icons";
 import type { FC } from "react";
+import React from "react";
 import type { IconName } from "../types";
 
 const storybookIconMap = Object.fromEntries(
