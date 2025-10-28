@@ -1,8 +1,6 @@
 function managerEntries(entry = []) {
-	return [...entry, require.resolve("./dist/manager.js")];
+  return [...entry, import.meta.resolve("./dist/manager.js")];
 }
 
-module.exports = {
-	managerEntries,
-	...require("./dist/preset"),
-};
+export { managerEntries };
+export * from "./dist/preset.js";

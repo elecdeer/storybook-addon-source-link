@@ -15,5 +15,6 @@
 	},
 	"[markdown]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	},
+	"biome.lsp.bin": "node_modules/@biomejs/biome/bin/biome"
 }
