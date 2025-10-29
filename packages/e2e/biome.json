@@ -1,20 +1,13 @@
 {
 	"root": false,
 	"$schema": "https://biomejs.dev/schemas/2.3.1/schema.json",
+	"extends": "//",
 	"files": {
-		"includes": [
-			"**",
-			"!**/dist/**/*",
-			"!**/node_modules/**/*",
-			"!**/storybook-static/**/*",
-			"!**/package.json",
-			"!**/test-results/**/*",
-			"!**/playwright-report/**/*"
-		]
+		"includes": ["!**/test-results/**/*", "!**/playwright-report/**/*"]
 	},
-	"formatter": {
-		"enabled": true
-	},
-	"assist": { "actions": { "source": { "organizeImports": "on" } } },
-	"linter": { "enabled": true, "rules": { "recommended": true } }
+	"linter": {
+		"domains": {
+			"react": "recommended"
+		}
+	}
 }
