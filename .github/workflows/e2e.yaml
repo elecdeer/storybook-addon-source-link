@@ -16,19 +16,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: 22.x
-
-      - name: Enable corepack
-        run: corepack enable pnpm
-
       - name: Get Playwright version
         id: get-version
-        working-directory: packages/e2e
         run: |
-          VERSION=$(pnpm list @playwright/test --json --depth=0 | jq -r '.[0].devDependencies["@playwright/test"].version')
+          VERSION=$(yq '.catalogs.default["@playwright/test"].version' pnpm-lock.yaml)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
   e2e:
