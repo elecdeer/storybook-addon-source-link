@@ -6,8 +6,8 @@ import {
 	WithTooltip,
 } from "storybook/internal/components";
 import { STORY_CHANGED } from "storybook/internal/core-events";
-import { useChannel, useStorybookApi } from "storybook/internal/manager-api";
 import type { API_LeafEntry } from "storybook/internal/types";
+import { useChannel, useStorybookApi } from "storybook/manager-api";
 import { styled } from "storybook/theming";
 import type { LinkEntry } from "../types";
 import { resolveLinks } from "./resolveParameter";
@@ -23,7 +23,7 @@ const ColoredCheckIcon = styled(CheckIcon)`
 
 const checkIsStaticBuild = (): boolean => {
 	try {
-		// @ts-ignore storybook sets window.CONFIG_TYPE
+		// @ts-expect-error storybook sets window.CONFIG_TYPE
 		return window.CONFIG_TYPE !== "DEVELOPMENT";
 	} catch {
 		console.warn(

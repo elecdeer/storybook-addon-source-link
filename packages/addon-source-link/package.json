@@ -7,7 +7,7 @@
 		"vscode",
 		"link",
 		"open",
-		"storybook-addons"
+		"storybook-addon"
 	],
 	"repository": {
 		"type": "git",
@@ -19,12 +19,12 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
+			"default": "./dist/index.js"
 		},
-		"./preset": "./dist/preset.cjs",
+		"./preset": "./dist/preset.js",
 		"./preview": "./dist/preview.js",
 		"./manager": "./dist/manager.js",
+    "./manager-helpers": "./dist/manager-helpers.js",
 		"./package.json": "./package.json"
 	},
 	"files": [
@@ -40,7 +40,7 @@
 		"type-check": "tsc --noEmit"
 	},
 	"peerDependencies": {
-		"storybook": "^9.0.0"
+		"storybook": "^10.0.0"
 	},
 	"dependencies": {
 		"@storybook/icons": "catalog:",
@@ -61,10 +61,8 @@
 		"provenance": true
 	},
 	"bundler": {
-		"exportEntries": [
-			"src/index.ts"
-		],
 		"managerEntries": [
+			"src/index.ts",
 			"src/manager.ts"
 		],
 		"previewEntries": [
