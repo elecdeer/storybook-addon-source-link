@@ -23,7 +23,7 @@ const ColoredCheckIcon = styled(CheckIcon)`
 
 const checkIsStaticBuild = (): boolean => {
 	try {
-		// @ts-ignore storybook sets window.CONFIG_TYPE
+		// @ts-expect-error storybook sets window.CONFIG_TYPE
 		return window.CONFIG_TYPE !== "DEVELOPMENT";
 	} catch {
 		console.warn(
