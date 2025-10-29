@@ -6,8 +6,8 @@ import {
 	WithTooltip,
 } from "storybook/internal/components";
 import { STORY_CHANGED } from "storybook/internal/core-events";
-import { useChannel, useStorybookApi } from "storybook/internal/manager-api";
 import type { API_LeafEntry } from "storybook/internal/types";
+import { useChannel, useStorybookApi } from "storybook/manager-api";
 import { styled } from "storybook/theming";
 import type { LinkEntry } from "../types";
 import { resolveLinks } from "./resolveParameter";
