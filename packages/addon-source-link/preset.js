@@ -1,5 +1,5 @@
 function managerEntries(entry = []) {
-  return [...entry, import.meta.resolve("./dist/manager.js")];
+	return [...entry, import.meta.resolve("./dist/manager.js")];
 }
 
 export { managerEntries };
