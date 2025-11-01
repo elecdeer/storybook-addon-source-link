@@ -1,4 +1,3 @@
-import { resolve } from "node:path";
 import { expect, test } from "@playwright/test";
 
 test.describe("Storybook Demo", () => {
@@ -41,7 +40,7 @@ test.describe("Storybook Demo", () => {
 		console.log("✅ Source-link addon tool is displayed in toolbar!");
 	});
 
-	test("should have correct link URLs in tooltip for Button story", async ({
+	test("should have correct links in tooltip for Button story", async ({
 		page,
 	}) => {
 		// Buttonストーリーに直接移動
@@ -59,56 +58,43 @@ test.describe("Storybook Demo", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを全て取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを全て取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 少なくとも1つのリンクが存在することを確認
 		expect(linkCount).toBeGreaterThan(0);
 
-		// 実際のファイルパスを動的に構築（CIでも動作するように）
-		const projectRoot = process.cwd();
-		const buttonStoriesPath = resolve(projectRoot, "stories/Button.stories.ts");
-		const buttonComponentPath = resolve(projectRoot, "stories/Button.tsx");
-
-		const expectedLinkPatterns = [
-			{
-				title: "./stories/Button.stories.ts",
-				expectedHref: `vscode://file://${buttonStoriesPath}`,
-			},
-			{
-				title: "./stories/Button.tsx",
-				expectedHref: `vscode://file://${buttonComponentPath}`,
-			},
-			{
-				title: "Powered by addon-source-link",
-				expectedHref: "https://github.com/elecdeer/storybook-addon-source-link",
-			},
+		const expectedLinkLabels = [
+			"./stories/Button.stories.ts",
+			"./stories/Button.tsx",
+			"Powered by addon-source-link",
 		];
 
-		// 各リンクのURLを実際のパスで検証（順番は固定）
+		// 各リンクのラベルを検証
 		for (let i = 0; i < linkCount; i++) {
 			const link = links.nth(i);
-			const href =
-				(await link.getAttribute("href")) ||
-				(await link.getAttribute("data-href"));
 			const title = await link.textContent();
 
 			// リンクが存在することを確認
-			expect(href).toBeTruthy();
 			expect(title).toBeTruthy();
 
 			// 順番に基づいて期待される値と比較
-			const expectedPattern = expectedLinkPatterns[i];
-			expect(title).toBe(expectedPattern.title);
-			expect(href).toBe(expectedPattern.expectedHref);
+			expect(title).toBe(expectedLinkLabels[i]);
 		}
 
 		// 期待される数のリンクが存在することを確認
-		expect(linkCount).toBe(expectedLinkPatterns.length);
+		expect(linkCount).toBe(expectedLinkLabels.length);
+
+		// "Powered by"リンクは外部リンクであることを確認
+		const poweredByLink = links.last();
+		const poweredByHref = await poweredByLink.getAttribute("href");
+		expect(poweredByHref).toBe(
+			"https://github.com/elecdeer/storybook-addon-source-link",
+		);
 	});
 
-	test("should have correct link URLs in tooltip for Configure docs", async ({
+	test("should have correct links in tooltip for Configure docs", async ({
 		page,
 	}) => {
 		// Configure docsページに直接移動
@@ -126,55 +112,43 @@ test.describe("Storybook Demo", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを全て取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを全て取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 少なくとも1つのリンクが存在することを確認
 		expect(linkCount).toBeGreaterThan(0);
 
-		// 実際のファイルパスを動的に構築（CIでも動作するように）
-		const projectRoot = process.cwd();
-		const configureMdxPath = resolve(projectRoot, "stories/Configure.mdx");
-
-		const expectedLinkPatterns = [
-			{
-				title: "./stories/Configure.mdx",
-				expectedHref: `vscode://file://${configureMdxPath}`,
-			},
-			{
-				title: "./stories/Configure.mdx",
-				expectedHref: `vscode://file://${configureMdxPath}`,
-			},
-			{
-				title: "Powered by addon-source-link",
-				expectedHref: "https://github.com/elecdeer/storybook-addon-source-link",
-			},
+		const expectedLinkLabels = [
+			"./stories/Configure.mdx",
+			"./stories/Configure.mdx",
+			"Powered by addon-source-link",
 		];
 
-		// 各リンクのURLを実際のパスで検証（順番は固定）
+		// 各リンクのラベルを検証
 		for (let i = 0; i < linkCount; i++) {
 			const link = links.nth(i);
-			const href =
-				(await link.getAttribute("href")) ||
-				(await link.getAttribute("data-href"));
 			const title = await link.textContent();
 
 			// リンクが存在することを確認
-			expect(href).toBeTruthy();
 			expect(title).toBeTruthy();
 
 			// 順番に基づいて期待される値と比較
-			const expectedPattern = expectedLinkPatterns[i];
-			expect(title).toBe(expectedPattern.title);
-			expect(href).toBe(expectedPattern.expectedHref);
+			expect(title).toBe(expectedLinkLabels[i]);
 		}
 
 		// 期待される数のリンクが存在することを確認
-		expect(linkCount).toBe(expectedLinkPatterns.length);
+		expect(linkCount).toBe(expectedLinkLabels.length);
+
+		// "Powered by"リンクは外部リンクであることを確認
+		const poweredByLink = links.last();
+		const poweredByHref = await poweredByLink.getAttribute("href");
+		expect(poweredByHref).toBe(
+			"https://github.com/elecdeer/storybook-addon-source-link",
+		);
 	});
 
-	test("should have correct link URLs in tooltip for Button autodocs", async ({
+	test("should have correct links in tooltip for Button autodocs", async ({
 		page,
 	}) => {
 		// Button autodocsページに直接移動
@@ -192,53 +166,40 @@ test.describe("Storybook Demo", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを全て取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを全て取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 少なくとも1つのリンクが存在することを確認
 		expect(linkCount).toBeGreaterThan(0);
 
-		// 実際のファイルパスを動的に構築（CIでも動作するように）
-		const projectRoot = process.cwd();
-		const buttonStoriesPath = resolve(projectRoot, "stories/Button.stories.ts");
-		const buttonComponentPath = resolve(projectRoot, "stories/Button.tsx");
-
-		const expectedLinkPatterns = [
-			{
-				title: "./stories/Button.stories.ts",
-				expectedHref: `vscode://file://${buttonStoriesPath}`,
-			},
-			{
-				title: "./stories/Button.tsx",
-				expectedHref: `vscode://file://${buttonComponentPath}`,
-			},
-			{
-				title: "Powered by addon-source-link",
-				expectedHref: "https://github.com/elecdeer/storybook-addon-source-link",
-			},
+		const expectedLinkLabels = [
+			"./stories/Button.stories.ts",
+			"./stories/Button.tsx",
+			"Powered by addon-source-link",
 		];
 
-		// 各リンクのURLを実際のパスで検証（順番は固定）
+		// 各リンクのラベルを検証
 		for (let i = 0; i < linkCount; i++) {
 			const link = links.nth(i);
-			const href =
-				(await link.getAttribute("href")) ||
-				(await link.getAttribute("data-href"));
 			const title = await link.textContent();
 
 			// リンクが存在することを確認
-			expect(href).toBeTruthy();
 			expect(title).toBeTruthy();
 
 			// 順番に基づいて期待される値と比較
-			const expectedPattern = expectedLinkPatterns[i];
-			expect(title).toBe(expectedPattern.title);
-			expect(href).toBe(expectedPattern.expectedHref);
+			expect(title).toBe(expectedLinkLabels[i]);
 		}
 
 		// 期待される数のリンクが存在することを確認
-		expect(linkCount).toBe(expectedLinkPatterns.length);
+		expect(linkCount).toBe(expectedLinkLabels.length);
+
+		// "Powered by"リンクは外部リンクであることを確認
+		const poweredByLink = links.last();
+		const poweredByHref = await poweredByLink.getAttribute("href");
+		expect(poweredByHref).toBe(
+			"https://github.com/elecdeer/storybook-addon-source-link",
+		);
 	});
 
 	test("should display custom links for Header WithCustomLinks story", async ({
@@ -259,8 +220,8 @@ test.describe("Storybook Demo", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを全て取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを全て取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 期待されるリンク数を確認（デフォルト + カスタム、Copy import pathが表示されない場合は4）
@@ -308,18 +269,7 @@ test.describe("Storybook Demo", () => {
 
 		// Copy import pathリンクは現在表示されていないため、他のカスタムリンクの存在を確認
 
-		// デフォルトリンクも含まれていることを確認
-		const storyLink = actualLinks.find(
-			(link) => link.title === "./stories/Header.stories.ts",
-		);
-		expect(storyLink).toBeTruthy();
-		expect(storyLink?.href).toContain("vscode://file://");
-
-		const componentLink = actualLinks.find(
-			(link) => link.title === "./stories/Header.tsx",
-		);
-		expect(componentLink).toBeTruthy();
-		expect(componentLink?.href).toContain("vscode://file://");
+		// デフォルトリンクはWithCustomLinksでは無効化されているため、表示されない
 
 		// "Powered by" リンクの確認
 		const poweredByLink = actualLinks.find(
@@ -353,8 +303,8 @@ test.describe("Storybook Demo", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを全て取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを全て取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 少なくとも3つのリンクが存在することを確認（関数型リンク + Powered by）
@@ -409,6 +359,51 @@ test.describe("Storybook Demo", () => {
 
 		console.log(
 			"✅ Function-based links are displayed correctly in Header WithFunctionLinks story!",
+		);
+	});
+
+	test("should display editor type links as clickable buttons", async ({
+		page,
+	}) => {
+		// Buttonストーリーに直接移動
+		await page.goto("/?path=/story/example-button--primary");
+
+		// ページが完全に読み込まれるまで待つ
+		await page.waitForLoadState("networkidle");
+
+		// source-linkアドオンのツールボタンをクリック
+		const sourceLinkButton = page.locator('button[title="Open source file"]');
+		await expect(sourceLinkButton).toBeVisible();
+		await sourceLinkButton.click();
+
+		// ツールチップが表示されるのを待つ
+		const tooltip = page.locator('[data-testid="tooltip"]');
+		await expect(tooltip).toBeAttached({ timeout: 10000 });
+
+		// editor typeのリンク（ボタン）が表示されることを確認
+		const storyEditorLink = tooltip
+			.locator("button")
+			.filter({ hasText: "./stories/Button.stories.ts" });
+		await expect(storyEditorLink).toBeVisible();
+
+		const componentEditorLink = tooltip
+			.locator("button")
+			.filter({ hasText: "./stories/Button.tsx" });
+		await expect(componentEditorLink).toBeVisible();
+
+		// ボタンがクリック可能であることを確認
+		await expect(storyEditorLink).toBeEnabled();
+		await expect(componentEditorLink).toBeEnabled();
+
+		// ボタンには href 属性がないことを確認（onClick ハンドラを使用）
+		const storyLinkHref = await storyEditorLink.getAttribute("href");
+		expect(storyLinkHref).toBeNull();
+
+		const componentLinkHref = await componentEditorLink.getAttribute("href");
+		expect(componentLinkHref).toBeNull();
+
+		console.log(
+			"✅ Editor type links are displayed as clickable buttons without href!",
 		);
 	});
 });
