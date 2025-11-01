@@ -76,9 +76,10 @@ export type LinkEntry =
 			 * - `"link"`: The link will be opened in the same tab.
 			 * - `"linkBlank"`: The link will be opened in a new tab. Added target="_blank" to the link.
 			 * - `"copy"`: The link will be copied to the clipboard.
+			 * - `"editor"`: The link will be opened in the code editor.
 			 *
 			 * @default "linkBlank"
 			 */
-			type?: "link" | "linkBlank" | "copy" | undefined;
+			type?: "link" | "linkBlank" | "copy" | "editor" | undefined;
 	  }
 	| undefined;

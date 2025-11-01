@@ -123,6 +123,7 @@ If `undefined` is returned, the link will not be added.
     - `"link"`: The link will be opened in the same tab.
     - `"linkBlank"`: (default) The link will be opened in a new tab. Added target="\_blank" to the link.
     - `"copy"`: The link will be copied to the clipboard.
+    - `"editor"`: The link will be opened in the code editor.
   - `order`: (Optional) When order is specified, it will be sorted in ascending order. The default value is `0`.
 
 ### Preset settings provided by the addon
@@ -134,23 +135,24 @@ const preview: Preview = {
   parameters: {
     sourceLink: {
       links: {
-        "component-vscode": ({ importPath, rootPath }) => {
+        "component-editor": ({ importPath, rootPath }) => {
           if (!rootPath) return undefined;
           const componentPath = importPath.replace(/\.stories\.tsx?$/, ".tsx");
           const componentFileUrl = getFileUrl(rootPath, componentPath);
           return {
+            type: "editor",
             label: componentPath,
-            href: `vscode://${componentFileUrl.href}`,
+            href: componentFileUrl.href,
             icon: "VSCodeIcon",
           };
         },
-        "story-vscode": ({ importPath, rootPath }) => {
+        "story-editor": ({ importPath, rootPath }) => {
           if (!rootPath) return undefined;
           const fileUrl = getFileUrl(rootPath, importPath);
-          const href = `vscode://${fileUrl.href}`;
           return {
+            type: "editor",
             label: importPath,
-            href,
+            href: fileUrl.href,
             icon: "VSCodeIcon",
           };
         },

@@ -18,23 +18,24 @@ import type { SourceLinkParameter } from "./types";
 export const parameters = {
 	sourceLink: {
 		links: {
-			"component-vscode": ({ importPath, rootPath }) => {
+			"component-editor": ({ importPath, rootPath }) => {
 				if (!rootPath) return undefined;
 				const componentPath = importPath.replace(/\.stories\.tsx?$/, ".tsx");
 				const componentFileUrl = getFileUrl(rootPath, componentPath);
 				return {
+					type: "editor",
 					label: componentPath,
-					href: `vscode://${componentFileUrl.href}`,
+					href: componentFileUrl.href,
 					icon: "VSCodeIcon",
 				};
 			},
-			"story-vscode": ({ importPath, rootPath }) => {
+			"story-editor": ({ importPath, rootPath }) => {
 				if (!rootPath) return undefined;
 				const fileUrl = getFileUrl(rootPath, importPath);
-				const href = `vscode://${fileUrl.href}`;
 				return {
+					type: "editor",
 					label: importPath,
-					href,
+					href: fileUrl.href,
 					icon: "VSCodeIcon",
 				};
 			},

@@ -73,6 +73,21 @@ export const Tool = memo(function MyAddonSelector() {
 	const links = useMemo(() => {
 		return linksData
 			?.map((item) => {
+				if (item.type === "editor") {
+					return {
+						id: item.id,
+						title: item.label,
+						onClick: () => {
+							api.openInEditor({
+								file: item.href,
+							});
+						},
+						icon: item.icon && isIconName(item.icon) && (
+							<StorybookIcon name={item.icon} />
+						),
+						order: item.order ?? 0,
+					};
+				}
 				if (item.type === "copy") {
 					const clicked = !!copyClickedLink;
 					return {

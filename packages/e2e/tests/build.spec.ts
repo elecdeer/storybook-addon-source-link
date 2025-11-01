@@ -66,8 +66,8 @@ test.describe("Storybook Demo (Build)", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 「Powered by addon-source-link」リンクのみが表示されることを確認
@@ -116,8 +116,8 @@ test.describe("Storybook Demo (Build)", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 「Powered by addon-source-link」リンクのみが表示されることを確認
@@ -168,8 +168,8 @@ test.describe("Storybook Demo (Build)", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 「Powered by addon-source-link」リンクのみが表示されることを確認
@@ -222,8 +222,8 @@ test.describe("Storybook Demo (Build)", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// カスタムリンクも表示されることを確認（undefinedでない限り）
@@ -307,8 +307,8 @@ test.describe("Storybook Demo (Build)", () => {
 		const tooltip = page.locator('[data-testid="tooltip"]');
 		await expect(tooltip).toBeAttached({ timeout: 10000 });
 
-		// ツールチップ内のリンクを取得
-		const links = tooltip.locator("a[href], button[data-href]");
+		// ツールチップ内のリンク/ボタンを取得
+		const links = tooltip.locator("a[href], button");
 		const linkCount = await links.count();
 
 		// 関数型リンクが表示されることを確認（undefinedを返すものは除く）
