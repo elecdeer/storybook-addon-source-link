@@ -1,6 +1,6 @@
 {
 	"name": "storybook-addon-source-link",
-	"version": "1.0.1",
+	"version": "2.0.0",
 	"description": "Add a button to the Storybook toolbar that opens the file containing the Story in an IDE like VSCode.",
 	"keywords": [
 		"file",
@@ -24,7 +24,7 @@
 		"./preset": "./dist/preset.js",
 		"./preview": "./dist/preview.js",
 		"./manager": "./dist/manager.js",
-    "./manager-helpers": "./dist/manager-helpers.js",
+		"./manager-helpers": "./dist/manager-helpers.js",
 		"./package.json": "./package.json"
 	},
 	"files": [
