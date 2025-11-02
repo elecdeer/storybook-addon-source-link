@@ -1,5 +1,21 @@
 # storybook-addon-source-link
 
+## 2.0.0
+
+### Major Changes
+
+- [#60](https://github.com/elecdeer/storybook-addon-source-link/pull/60) [`1bac9ab`](https://github.com/elecdeer/storybook-addon-source-link/commit/1bac9ab9b85d50f21579452211989887b190bc01) Thanks [@elecdeer](https://github.com/elecdeer)! - Support Storybook v10
+
+### Minor Changes
+
+- [#64](https://github.com/elecdeer/storybook-addon-source-link/pull/64) [`9103432`](https://github.com/elecdeer/storybook-addon-source-link/commit/910343286257aeebe35d9c9aa897f383727d4bb9) Thanks [@elecdeer](https://github.com/elecdeer)! - Add support for opening links in the code editor. New link type `"editor"` allows links to be opened directly in the user's code editor by automatically detecting which editor they are using. This is different from the previous `vscode://` URL scheme approach, which only worked with VS Code.
+
+  **Breaking change**: The preset link keys have been renamed from `"component-vscode"` and `"story-vscode"` to `"component-editor"` and `"story-editor"`. If you are overriding these keys in your configuration, you will need to update your code.
+
+### Patch Changes
+
+- [#65](https://github.com/elecdeer/storybook-addon-source-link/pull/65) [`29fc30f`](https://github.com/elecdeer/storybook-addon-source-link/commit/29fc30f9592495df3362979f2a4c53161818f232) Thanks [@elecdeer](https://github.com/elecdeer)! - Migrate to npm trusted publishing for automated releases
+
 ## 1.0.1
 
 ### Patch Changes
