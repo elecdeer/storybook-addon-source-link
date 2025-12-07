@@ -1,5 +1,11 @@
 # storybook-addon-source-link
 
+## 2.0.1
+
+### Patch Changes
+
+- [#70](https://github.com/elecdeer/storybook-addon-source-link/pull/70) [`4bb1017`](https://github.com/elecdeer/storybook-addon-source-link/commit/4bb1017f63a0327a1f52addc91f27dc00815e25c) Thanks [@elecdeer](https://github.com/elecdeer)! - Add React and React DOM as dependencies supporting versions 16.8.0 through 19.0.0
+
 ## 2.0.0
 
 ### Major Changes
