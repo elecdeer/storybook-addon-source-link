@@ -45,14 +45,16 @@
 	"dependencies": {
 		"@storybook/icons": "catalog:",
 		"@storybook/addon-docs": "catalog:",
-		"react": "catalog:",
-		"react-dom": "catalog:"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
 	},
 	"devDependencies": {
 		"@std/path": "jsr:^1.1.1",
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
+		"react": "catalog:",
+		"react-dom": "catalog:",
 		"storybook": "catalog:",
 		"tsup": "catalog:"
 	},
