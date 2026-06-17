@@ -11,8 +11,12 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/elecdeer/storybook-addon-source-link/tree/main.git"
+		"url": "git+https://github.com/elecdeer/storybook-addon-source-link.git"
 	},
+	"bugs": {
+		"url": "https://github.com/elecdeer/storybook-addon-source-link/issues"
+	},
+	"homepage": "https://github.com/elecdeer/storybook-addon-source-link#readme",
 	"type": "module",
 	"license": "MIT",
 	"author": "elecdeer",
