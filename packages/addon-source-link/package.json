@@ -24,7 +24,6 @@
 		"./preset": "./dist/preset.js",
 		"./preview": "./dist/preview.js",
 		"./manager": "./dist/manager.js",
-		"./manager-helpers": "./dist/manager-helpers.js",
 		"./package.json": "./package.json"
 	},
 	"files": [
